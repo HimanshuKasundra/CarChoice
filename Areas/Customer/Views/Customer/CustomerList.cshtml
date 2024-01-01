@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewData["Title"] = "Customer List";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+@using System.Data
+@model DataTable
+@*@using CarChoice.Areas.Customer.Models*@
+<main id="main" class="main">
+<div class="container-fluid">
+    <table class="table table-bordered table-hover ">
+        <thead>
+            <tr>
+                <th scope="col">Customer Image</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Mobile number</th>
+            </tr>
+        </thead>
+
+        <tbody id="sample_2">
+            @foreach (DataRow dr in Model.Rows)
+            {
+                    Console.WriteLine(@dr["CustomerImageURL"]);
+                    <tr>
+                    <td><img src=@Url.Content(@dr["CustomerImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%; height:80px; width:80px;" /></td>
+                    <td>@dr["FirstName"]</td>
+                    <td>@dr["LastName"]</td>
+                    <td>@dr["Email"]</td>
+                    <td>@dr["Mobile"]</td>
+                  
+                    <td class="justify-content-center">
+                            <div class="d-flex">
+                                <div class="me-2">
+                                    <form method="post" asp-area="Customer" asp-controller="Customer" asp-action="CustomerDetails">
+                                        <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"])" name="CustomerID" />
+                                        <button type="submit" class="btn btn-warning" value="Delete">Details</button>
+                                    </form>
+                                </div>
+                                <div class="ms-2">
+                                    <form asp-area="Customer" asp-controller="Cutomer" asp-action="CustomerDelete">
+                                        <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"])" name="CustomerID" />
+                                        <button type="submit" class="btn btn-danger" value="Edit">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+</main>
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#sample_1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#sample_2 tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
