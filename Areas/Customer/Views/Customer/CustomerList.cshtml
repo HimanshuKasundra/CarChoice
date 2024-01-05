@@ -5,7 +5,7 @@
 }
 @using System.Data
 @model DataTable
-@*@using CarChoice.Areas.Customer.Models*@
+@using CarChoice.Areas.Customer.Models
 <main id="main" class="main">
 <div class="container-fluid">
     <table class="table table-bordered table-hover ">
@@ -16,6 +16,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Mobile number</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
 
@@ -33,15 +34,15 @@
                     <td class="justify-content-center">
                             <div class="d-flex">
                                 <div class="me-2">
-                                    <form method="post" asp-area="Customer" asp-controller="Customer" asp-action="CustomerDetails">
-                                        <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"])" name="CustomerID" />
-                                        <button type="submit" class="btn btn-warning" value="Delete">Details</button>
+                                    <form  asp-area="Customer" asp-controller="Customer" asp-action="CustomerDetails">
+                                        <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"].ToString())" name="CustomerID" />
+                                        <button type="submit" class="btn btn-warning" value="Detals">Details</button>
                                     </form>
                                 </div>
                                 <div class="ms-2">
-                                    <form asp-area="Customer" asp-controller="Cutomer" asp-action="CustomerDelete">
-                                        <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"])" name="CustomerID" />
-                                        <button type="submit" class="btn btn-danger" value="Edit">Delete</button>
+                                    <form asp-area="Customer" asp-controller="Customer" asp-action="CustomerDelete">
+                                        <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"].ToString())" name="CustomerID" />
+                                        <button  type="submit" class="btn btn-danger" value="Detals">Delete</button>
                                     </form>
                                 </div>
                             </div>
@@ -57,13 +58,27 @@
 @section Scripts
     {
     <script>
-        $(document).ready(function () {
-            $("#sample_1").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#sample_2 tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
+        //$(document).ready(function () {
+        //    $("#sample_1").on("keyup", function () {
+        //        var value = $(this).val().toLowerCase();
+        //        $("#sample_2 tr").filter(function () {
+        //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        //        });
+        //    });
+        //});
+
+        function deleteAlert() {
+            if (confirm("Are you sure you want to delete?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     </script>
 }
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Add Brand ";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@model CarChoice.Areas.Brand.Models.BrandModel
+
+
+<main class="main" id="main">
+    <div class="pagetitle">
+        <h1>Brands</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                <li class="breadcrumb-item"><span>Brand Add</span></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <form class="row g-3" role="form" method="post" enctype="multipart/form-data" asp-area="Brand" asp-controller="Brand" asp-action="BrandSave">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(x=>x.BrandID)
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="BrandName" placeholder="Enter Country Name" />
+                <span asp-validation-for="BrandName" class="text-danger"></span>
+                <label for="floatingName">Brand Name</label>
+            </div>
+        </div>
+
+        <div class="col-12 m-1">
+            <label asp-for="Logo" class="form-label"></label>
+            <div class="custom-file">
+                <input class="form-control" id="coverphoto" autofocus asp-for="Logo" class="custom-file-input" id="customFile" required>
+                <label class="custome-file-label" for="customFile"></label>
+            </div>
+            <div class="invalid-feedback">Please Choose file for photo</div>
+            <span asp-validation-for="Logo" class="text-danger"></span>
+        </div>
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+            <a class="btn btn-outline-secondary" asp-area="Brand" asp-controller="Brand" asp-action="BrandList">Back</a>
+        </div>
+    </form>
+</main>
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

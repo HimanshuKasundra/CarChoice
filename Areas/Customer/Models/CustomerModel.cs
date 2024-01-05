@@ -5,54 +5,54 @@ namespace CarChoice.Areas.Customer.Models
 	public class CustomerModel
 	{
 		public int CustomerID { get; set; }
-		[Required]
+		//[Required]
 		[Display (Name ="FirstName field is required")]
 		public string FirstName { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "LastName field is required")]
 
 		public string LastName { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "Email field is required")]
 
 		public string Email { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "Mobile number field is required")]
 
 		public string Mobile { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "Address field is required")]
 
 		public string Address { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "Licence number field is required")]
 
 		public string LicenceNumber { get; set; }
 
-		[Required]
+		//[Required]
 
 		public string LicenceImageURL { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "LicenceImage field is required")]
 
 		public IFormFile LicenceImage { get; set; }
 
-		[Required]
+		//[Required]
 
 		public string CustomerImageURL { get; set; }
 
-		[Required]
+		//[Required]
 		[Display(Name = "CustomerImageURL field is required")]
 
 		public IFormFile CustomerImage { get; set; }
 
-		public DateTime created { get; set; }	
+		public DateTime Created { get; set; }	
 
 		public DateTime Modified { get; set; }	
 	}

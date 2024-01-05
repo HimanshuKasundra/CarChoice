@@ -5,8 +5,8 @@
 @model CarChoice.Areas.SEC_User.Models.SEC_UserModel;
 @using CarChoice.Areas.SEC_User.Models;
 @using System.Data;
+<main class="main" id="main">
 
-<body id="kt_body" class="app-blank bgi-size-cover bgi-attachment-fixed bgi-position-center">
 
 <div class="d-flex flex-column flex-root" id="kt_app_root">
 	<!--begin::Page bg image-->
@@ -108,4 +108,9 @@
 	</div>
 	<!--end::Authentication - Sign-in-->
 </div>
-</body>
+</main>
+@*@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}*@

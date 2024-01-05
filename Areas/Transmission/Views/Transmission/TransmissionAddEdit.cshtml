@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Add Transmission ";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@model CarChoice.Areas.Transmission.Models.TransmissionModel
+
+
+<main class="main" id="main">
+    <div class="pagetitle">
+        <h1>Transmission</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                <li class="breadcrumb-item"><span>Transmission Add</span></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <form class="row g-3" role="form" method="post" enctype="multipart/form-data" asp-area="Transmission" asp-controller="Transmission" asp-action="TransmissionSave">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(x=>x.TransmissionID)
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="TransmissionType" placeholder="Enter Country Name" />
+                <span asp-validation-for="TransmissionType" class="text-danger"></span>
+                <label for="floatingName">Transmission Type</label>
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+            <a class="btn btn-outline-secondary" asp-area="Transmission" asp-controller="Transmission" asp-action="TransmissionList">Back</a>
+        </div>
+    </form>
+</main>
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

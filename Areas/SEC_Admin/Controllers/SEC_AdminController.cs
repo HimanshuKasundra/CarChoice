@@ -1,10 +1,13 @@
-﻿using CarChoice.DAL.SEC_Admin;
+﻿using CarChoice.BAL;
+using CarChoice.DAL.SEC_Admin;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace CarChoice.Areas.SEC_Admin.Controllers
 {
-	public class SEC_AdminController : Controller
+    [CheckAccess]
+
+    public class SEC_AdminController : Controller
 	{
         #region Admin Dashboard
         [Area("SEC_Admin")]

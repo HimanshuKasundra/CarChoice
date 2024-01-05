@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Rent List";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+@using System.Data
+@model DataTable
+@using CarChoice.Areas.Rent.Models
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Rent</h1>
+        <nav>
+            <div class="Row">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Rent" asp-area="Rent" asp-action="RentList">Rent List</a></li>
+
+
+                    <form method="post" asp-area="Rent" asp-controller="Rent" asp-action="RentAddEdit">
+                        <button type="submit" class="btn btn-success" value="Detals">Add Rent</button>
+                    </form>
+            </div>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <table class="table table-hover table-header-fixed">
+        <thead>
+            <tr>
+                <th scope="col">Rent Id</th>
+
+                <th scope="col">Rent </th>
+                <th scope="col">Car type</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">Modified</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sample_2">
+            @foreach (DataRow dataRow in Model.Rows)
+            {
+                <tr>
+                    <td>@dataRow["RentID"]</td>
+                    <td>@dataRow["Rent"]</td>
+                    <td>@dataRow["CarType"]</td>
+
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
+                    <td class="justify-content-center">
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <form method="post" asp-area="Rent" asp-controller="Rent" asp-action="RentAddEdit">
+                                    <input type="hidden" value="@Convert.ToInt32(dataRow["RentID"].ToString())" name="RentID" />
+                                    <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
+                                </form>
+                            </div>
+                            <div class="ms-2">
+                                <form asp-area="Rent" asp-controller="Rent" asp-action="RentDelete">
+                                    <input type="hidden" value="@Convert.ToInt32(dataRow["RentID"].ToString())" name="RentID" />
+                                    <button type="submit" class="btn btn-danger" value="Detals">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</main>
+
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

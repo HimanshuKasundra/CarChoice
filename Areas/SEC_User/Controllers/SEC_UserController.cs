@@ -9,7 +9,7 @@ namespace CarChoice.Areas.SEC_User.Controllers
     [Route("SEC_User/[controller]/[action]")]
     public class SEC_UserController : Controller
     {
-
+       
         public IActionResult SEC_UserLogin()
         {
             return View();
@@ -18,14 +18,6 @@ namespace CarChoice.Areas.SEC_User.Controllers
         {
             return View();
         }
-		private readonly IConfiguration Configuration;
-		private readonly IWebHostEnvironment _webHostEnvironment;
-
-		public SEC_UserController(IConfiguration _Configuration, IWebHostEnvironment webHostEnvironment)
-		{
-			Configuration = _Configuration;
-			_webHostEnvironment = webHostEnvironment;
-		}
 
 
 		#region Login
@@ -50,7 +42,7 @@ namespace CarChoice.Areas.SEC_User.Controllers
             }
             else
             {
-                SEC_UserDAL SEC_UserDAL = new SEC_UserDAL(_webHostEnvironment);
+                SEC_UserDAL SEC_UserDAL = new SEC_UserDAL();
                 DataTable dt = SEC_UserDAL.dbo_PR_UserDetails_SelectByUserNamePassword(SEC_UserModel.UserName, SEC_UserModel.Password);
                 if (dt.Rows.Count > 0)
                 {
@@ -72,7 +64,7 @@ namespace CarChoice.Areas.SEC_User.Controllers
                     TempData["Error"] = "User Name or Password is invalid!";
                     return RedirectToAction("SEC_UserLogin");
                 }
-				if (HttpContext.Session.GetString("UserName") != null && HttpContext.Session.GetString("Password") != null && HttpContext.Session.GetString("UserName") == "himanshu")
+				if (HttpContext.Session.GetString("UserName") != null && HttpContext.Session.GetString("Password") != null && HttpContext.Session.GetString("UserName") == "Himanshu")
 				{
 					return RedirectToAction("SEC_AdminDashboard", "SEC_Admin", new { area = "SEC_Admin" });
 				}
@@ -89,7 +81,7 @@ namespace CarChoice.Areas.SEC_User.Controllers
         #region Register
         public IActionResult Register(SEC_UserModel SEC_UserModel)
         {
-            SEC_UserDAL SEC_UserDAL = new SEC_UserDAL(_webHostEnvironment);
+            SEC_UserDAL SEC_UserDAL = new SEC_UserDAL();
             bool IsSuccess = SEC_UserDAL.dbo_PR_UserDetails_Register(SEC_UserModel);
             if (IsSuccess)
             {

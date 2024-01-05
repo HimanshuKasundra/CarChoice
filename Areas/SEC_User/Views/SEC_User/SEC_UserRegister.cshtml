@@ -3,6 +3,7 @@
 }
 @model CarChoice.Areas.SEC_User.Models.SEC_UserModel;
 @using CarChoice.Areas.SEC_User.Models;
+<main class="main" id="main">
 
 <div class="d-flex flex-column flex-root" id="kt_app_root">
 	<!--begin::Page bg image-->
@@ -137,3 +138,9 @@
 	</div>
 	<!--end::Authentication - Sign-in-->
 </div>
+</main>
+@*@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}*@

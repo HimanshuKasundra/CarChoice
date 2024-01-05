@@ -22,8 +22,8 @@
                     <!-- Sales Card -->
                     <div class=" col-md-6">
                         <div class="card info-card sales-card">
-
-                            <div class="card-body">
+                            <a asp-area="Car" asp-controller="Car" asp-action="CarList">
+                            <div class="card-body" >
                                 <h5 class="card-title">Total Cars <span>| Today</span></h5>
 
                                 <div class="d-flex align-items-center">
@@ -37,13 +37,14 @@
                                     </div>
                                 </div>
                             </div>
+                                </a>
 
                         </div>
                     </div><!-- End Sales Card -->
                     <!-- Revenue Card -->
                     <div class=" col-md-6">
                         <div class="card info-card revenue-card">
-
+                            <a asp-area="Brand" asp-controller="Brand" asp-action="BrandList">
                             <div class="card-body">
                                 <h5 class="card-title">Brands <span>| This Month</span></h5>
 
@@ -58,14 +59,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                                </a>
                         </div>
                     </div><!-- End Revenue Card -->
                     <!-- Customers Card -->
                     <div class=" col-md-6">
 
                         <div class="card info-card customers-card">
-
+                            <a asp-area="Customer" asp-controller="Customer" asp-action="CustomerList">
                             <div class="card-body">
                                 <h5 class="card-title">Customers <span>| This Year</span></h5>
 
@@ -79,8 +80,9 @@
 
                                     </div>
                                 </div>
-
                             </div>
+                                </a>
+
                         </div>
 
                     </div><!-- End Customers Card -->
@@ -112,3 +114,8 @@
         </div>
     </section>
 </main>
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

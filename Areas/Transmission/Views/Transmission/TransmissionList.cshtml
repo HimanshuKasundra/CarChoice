@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Transmission List";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+@using System.Data
+@model DataTable
+@using CarChoice.Areas.Transmission.Models
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Transmission</h1>
+        <nav>
+            <div class="Row">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Transmission" asp-area="Transmission" asp-action="TransmissionList">Transmisson List</a></li>
+
+
+                    <form method="post" asp-area="Transmission" asp-controller="Transmission" asp-action="TransmissionAddEdit">
+                        <button type="submit" class="btn btn-success" value="Detals">Add Transmission</button>
+                    </form>
+            </div>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <table class="table table-hover table-header-fixed">
+        <thead>
+            <tr>
+                <th scope="col">Transmission Id</th>
+
+                <th scope="col">Transmission Type</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">Modified</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sample_2">
+            @foreach (DataRow dataRow in Model.Rows)
+            {
+                <tr>
+                    <td>@dataRow["TransmissionID"]</td>
+                    <td>@dataRow["TransmissionType"]</td>
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
+                    <td class="justify-content-center">
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <form method="post" asp-area="Transmission" asp-controller="Transmission" asp-action="TransmissionAddEdit">
+                                    <input type="hidden" value="@Convert.ToInt32(dataRow["TransmissionID"].ToString())" name="TransmissionID" />
+                                    <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
+                                </form>
+                            </div>
+                        <div class="ms-2">
+                            <form asp-area="Transmission" asp-controller="Transmission" asp-action="TransmissionDelete">
+                                <input type="hidden" value="@Convert.ToInt32(dataRow["TransmissionID"].ToString())" name="TransmissionID" />
+                                <button type="submit" class="btn btn-danger" value="Detals">Delete</button>
+                            </form>
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</main>
+
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

@@ -9,11 +9,7 @@ namespace CarChoice.DAL.SEC_User
 {
     public class SEC_UserDALBase : DALHelper
     {
-		private readonly IWebHostEnvironment _webHostEnvironment;
-		public SEC_UserDALBase(IWebHostEnvironment webHostEnvironment )
-		{
-			_webHostEnvironment = webHostEnvironment;
-		}
+		
 
 		#region Method: dbo_PR_SEC_User_SelectByPK
 		public DataTable dbo_PR_UserDetails_SelectByUserNamePassword(string UserName, string Password)
@@ -42,13 +38,13 @@ namespace CarChoice.DAL.SEC_User
 
 
         #region Method: dbo_PR_SEC_User_Register
-        public bool dbo_PR_UserDetails_Register(SEC_UserModel SEC_UserModel)
+        public bool dbo_PR_UserDetails_Register(SEC_UserModel sEC_UserModel)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(ConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_UserDetails_SelectUserName");
-                sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, SEC_UserModel.UserName);
+                DbCommand dbCMD =sqlDB .GetStoredProcCommand("PR_UserDetails_SelectUserName");
+                sqlDB.AddInParameter(dbCMD, "UserName", SqlDbType.VarChar, sEC_UserModel.UserName);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDB.ExecuteReader(dbCMD))
                 {
@@ -60,25 +56,32 @@ namespace CarChoice.DAL.SEC_User
                 }
                 else
                 {
-                    if (SEC_UserModel.UserImage != null)
+
+                    if (sEC_UserModel.UserImage != null)
                     {
-						string folder = "Photos/Users/";
-						folder += Guid.NewGuid().ToString() + "_" + SEC_UserModel.UserImage.FileName;  // Guid.NewGuid().ToString() for making file name unique
+                        string FilePath = "wwwroot\\Photos\\Users";
+                        string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        string fileNameWithPath = Path.Combine(path, sEC_UserModel.UserImage.FileName);
 
-						SEC_UserModel.UserImageURL = "/" + folder;
+                        sEC_UserModel.UserImageURL = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + sEC_UserModel.UserImage.FileName;
 
-						string serverfolder = Path.Combine( _webHostEnvironment.WebRootPath, folder);
-
-						SEC_UserModel.UserImage.CopyToAsync(new FileStream(serverfolder, FileMode.Create));
-					}
+                        using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                        {
+                            sEC_UserModel.UserImage.CopyTo(fileStream);
+                        }
+                    }
 
                     DbCommand dbCMD1 = sqlDB.GetStoredProcCommand("PR_UserDetails_Insert");
-                    sqlDB.AddInParameter(dbCMD1, "FirstName", SqlDbType.VarChar, SEC_UserModel.FirstName);
-                    sqlDB.AddInParameter(dbCMD1, "LastName", SqlDbType.VarChar, SEC_UserModel.LastName);
-                    sqlDB.AddInParameter(dbCMD1, "Email", SqlDbType.VarChar, SEC_UserModel.Email);
-                    sqlDB.AddInParameter(dbCMD1, "UserName", SqlDbType.VarChar, SEC_UserModel.UserName);
-                    sqlDB.AddInParameter(dbCMD1, "Password", SqlDbType.VarChar, SEC_UserModel.Password);
-                    sqlDB.AddInParameter(dbCMD1, "UserImageURL", SqlDbType.VarChar, SEC_UserModel.UserImageURL);
+                    sqlDB.AddInParameter(dbCMD1, "FirstName", SqlDbType.VarChar, sEC_UserModel.FirstName);
+                    sqlDB.AddInParameter(dbCMD1, "LastName", SqlDbType.VarChar, sEC_UserModel.LastName);
+                    sqlDB.AddInParameter(dbCMD1, "Email", SqlDbType.VarChar, sEC_UserModel.Email);
+                    sqlDB.AddInParameter(dbCMD1, "UserName", SqlDbType.VarChar, sEC_UserModel.UserName);
+                    sqlDB.AddInParameter(dbCMD1, "Password", SqlDbType.VarChar, sEC_UserModel.Password);
+                    sqlDB.AddInParameter(dbCMD1, "UserImageURL", SqlDbType.VarChar, sEC_UserModel.UserImageURL);
                     if (Convert.ToBoolean(sqlDB.ExecuteNonQuery(dbCMD1)))
                     {
                         return true;
