@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "CAr List";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@using System.Data
+@model DataTable
+@using CarChoice.Areas.Car.Models;
+
+<main class="main" id="main">
+
+    <div class="pagetitle">
+        <h1>CAr</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                <li class="breadcrumb-item"><a asp-controller="Car" asp-area="Car" asp-action="Car">Car List</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="m-2">
+        <form class="row g-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+                
+                <div>
+                    <a asp-area="Car" asp-controller="Car" asp-action="CarAddEdit" class="btn btn-outline-primary"><i class="bi bi-plus-lg"></i>&nbsp;Add Car</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="overflow-x">
+        <table class="table table-hover table-header-fixed" style="overflow-x">
+        <thead>
+            <tr>
+                <th scope="col">Car Image</th>
+
+                <th scope="col">Car Name</th>
+                <th scope="col">Brand Name</th>
+                <th scope="col">Model</th>
+                <th scope="col">Year</th>
+                <th scope="col">Transmission Type</th>
+                <th scope="col">Fuel Type</th>
+                <th scope="col">Vehicle no.</th>
+                <th scope="col">Rent</th>
+                <th scope="col">Availbility</th>
+                <th class="text-center">Created</th>
+                <th class="text-center">Modified</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="sample_2">
+            @foreach (DataRow dataRow in Model.Rows)
+            {
+                <tr>
+                    <td><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%; height:80px; width:80px;" /></td>
+
+                    <td>@dataRow["CarName"]</td>
+                    <td>@dataRow["BrandName"]</td>
+                    <td>@dataRow["Model"]</td>
+                    <td>@Convert.ToInt64( dataRow["Year"].ToString())</td>
+                    <td>@dataRow["TransmissionType"]</td>
+                    <td>@dataRow["FuelType"]</td>
+                    <td>@dataRow["VehicleNo"]</td>
+                    <td>@Convert.ToDouble(dataRow["Rent"].ToString())rs.</td>
+                    <td>@dataRow["Availability"]</td>
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
+                    <td class="justify-content-center">
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <form asp-area="Car" asp-controller="Car" asp-action="CarAddEdit">
+                                    <input type="hidden" value="@Convert.ToInt32(dataRow["CarID"].ToString())" name="CarID" />
+                                    <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
+                                </form>
+                            </div>
+                            <div class="ms-2">
+                                <form method="post" asp-area="Car" asp-controller="Car" asp-action="CarDelete">
+                                    <input type="hidden" value="@Convert.ToInt32(dataRow["CarID"].ToString())" name="CarID" />
+                                    <button type="submit" class="btn btn-danger" value="Detals">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+    </div>
+</main>
+
+@section Scripts{
+    <script>
+     function fun1() {
+         if (confirm("Are you sure you want to delete?")) {
+             return true;
+         }
+         else {
+             return false;
+         }
+     }
+</script>
+}

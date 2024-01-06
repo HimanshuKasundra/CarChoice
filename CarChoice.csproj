@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Brand\Data\" />
+    <Folder Include="Areas\Car\Data\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Rent\Data\" />
     <Folder Include="Areas\SEC_Admin\Data\" />
