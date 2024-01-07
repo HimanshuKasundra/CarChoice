@@ -8,12 +8,14 @@
 
   <ItemGroup>
     <Folder Include="Areas\Brand\Data\" />
+    <Folder Include="Areas\Car\Car\" />
     <Folder Include="Areas\Car\Data\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Rent\Data\" />
     <Folder Include="Areas\SEC_Admin\Data\" />
     <Folder Include="Areas\SEC_Admin\Models\" />
     <Folder Include="Areas\SEC_User\Data\" />
+    <Folder Include="Areas\Fuel\Data\" />
     <Folder Include="Areas\Transmission\Data\" />
   </ItemGroup>
 

@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Car Add";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@model CarChoice.Areas.Car.Models.CarModel
+<main class="main" id="main">
+    <div class="pagetitle">
+        <h1>Car</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                <li class="breadcrumb-item"><span>Add Car </span></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <form class="row g-3" role="form" method="post" enctype="multipart/form-data" asp-controller="Car" asp-action="CarSave" asp-area="Car">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(x=>x.CarID)
+
+        <div class="col-md-12">
+            <div class="form-floating mb-3">
+                <select class="form-control" asp-for="BrandID" asp-items="@(new SelectList(ViewBag.BrandList,"BrandID","BrandName"))">
+                    <option value="">Select Brand</option>
+                </select>
+                <span asp-validation-for="BrandID" class="text-danger"></span>
+                <label for="floatingSelect">Brand Name</label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="CarName" placeholder="Enter Car Name" />
+                <span asp-validation-for="CarName" class="text-danger"></span>
+                <label for="floatingName">Car Name</label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="Model" placeholder="Enter Model " />
+                <span asp-validation-for="Model" class="text-danger"></span>
+                <label for="floatingName">Model </label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="Year" placeholder="Enter Year " />
+                <span asp-validation-for="Year" class="text-danger"></span>
+                <label for="floatingName">Year </label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating mb-3">
+                <select class="form-control" asp-for="TransmissionID" asp-items="@(new SelectList(ViewBag.TransmissionList,"TransmissionID","TransmissionType"))">
+                    <option value="">Select TransmissionType</option>
+                </select>
+                <span asp-validation-for="TransmissionID" class="text-danger"></span>
+                <label for="floatingSelect">Transmission Type</label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating mb-3">
+                <select class="form-control" asp-for="FuelID" asp-items="@(new SelectList(ViewBag.FuelList,"FuelID","FuelType"))">
+                    <option value="">Select Fuel</option>
+                </select>
+                <span asp-validation-for="FuelID" class="text-danger"></span>
+                <label for="floatingSelect">Fuel Type</label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="Availability" placeholder="Enter Availability " />
+                <span asp-validation-for="Availability" class="text-danger"></span>
+                <label for="floatingName">Availability </label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="VehicleNo" placeholder="Enter Vehicle Number " />
+                <span asp-validation-for="VehicleNo" class="text-danger"></span>
+                <label for="floatingName">Vehicle Number </label>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-floating mb-3">
+                <select class="form-control" asp-for="RentID" asp-items="@(new SelectList(ViewBag.RentList,"RentID","CarType"))">
+                    <option value="">Select Rent</option>
+                </select>
+                <span asp-validation-for="Rent" class="text-danger"></span>
+                <label for="floatingSelect">Rent</label>
+            </div>
+        </div>
+
+        <div class="col-12 m-1">
+            <label asp-for="CarImage" class="form-label"></label>
+            <div class="custom-file">
+                <input class="form-control" id="coverphoto" autofocus asp-for="CarImage" class="custom-file-input" id="customFile" required>
+                <label class="custome-file-label" for="customFile"></label>
+            </div>
+            <div class="invalid-feedback">Please Choose file of Car</div>
+            <span asp-validation-for="CarImage" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+            <a class="btn btn-outline-secondary" asp-area="Car" asp-controller="Car" asp-action="CarList">Back</a>
+        </div>
+    </form>
+    <!-- END SAMPLE FORM PORTLET-->
+</main>
+

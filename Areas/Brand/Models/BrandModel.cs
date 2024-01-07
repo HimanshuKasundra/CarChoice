@@ -20,6 +20,13 @@ namespace CarChoice.Areas.Brand.Models
         public DateTime Modified { get; set; }
     }
 
-   
+    public class BrandDropDownModel
+    {
+        public int BrandID { get; set; }
+        public string? BrandName { get; set; }
+    }
+  
+
+
 }
 

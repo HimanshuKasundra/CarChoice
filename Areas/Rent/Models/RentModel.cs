@@ -18,4 +18,13 @@ namespace CarChoice.Areas.Rent.Models
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }
+    public class RentDropDownModel
+    {
+        public int RentID { get; set; }
+        public Double Rent { get; set; }
+
+        public string CarType { get; set; }
+
+    }
+
 }

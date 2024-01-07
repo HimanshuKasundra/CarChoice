@@ -15,15 +15,22 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
                     <li class="breadcrumb-item"><a asp-controller="Rent" asp-area="Rent" asp-action="RentList">Rent List</a></li>
-
-
-                    <form method="post" asp-area="Rent" asp-controller="Rent" asp-action="RentAddEdit">
-                        <button type="submit" class="btn btn-success" value="Detals">Add Rent</button>
-                    </form>
+                 </ol>   
             </div>
-            </ol>
+            
         </nav>
     </div><!-- End Page Title -->
+    <div class="m-2">
+        <form class="row g-3" method="post">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <a asp-area="Rent" asp-controller="Rent" asp-action="RentAddEdit" class="btn btn-outline-primary"><i class="bi bi-plus-lg"></i>&nbsp;Add Rent</a>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <table class="table table-hover table-header-fixed">
         <thead>

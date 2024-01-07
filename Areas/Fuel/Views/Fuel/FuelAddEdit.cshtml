@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Add Fuel ";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@model CarChoice.Areas.Fuel.Models.FuelModel
+
+
+<main class="main" id="main">
+    <div class="pagetitle">
+        <h1>Fuel</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                <li class="breadcrumb-item"><span>Fuel Add</span></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <form class="row g-3" role="form" method="post" enctype="multipart/form-data" asp-area="Fuel" asp-controller="Fuel" asp-action="FuelSave">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(x=>x.FuelID)
+        <div class="col-md-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" asp-for="FuelType" placeholder="Enter Country Name" />
+                <span asp-validation-for="FuelType" class="text-danger"></span>
+                <label for="floatingName">Fuel Type</label>
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-success">Save</button>
+            <a class="btn btn-outline-secondary" asp-area="Fuel" asp-controller="Fuel" asp-action="FuelList">Back</a>
+        </div>
+    </form>
+</main>
+@*@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}*@

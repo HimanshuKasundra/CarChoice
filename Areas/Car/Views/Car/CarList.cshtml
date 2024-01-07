@@ -10,7 +10,7 @@
 <main class="main" id="main">
 
     <div class="pagetitle">
-        <h1>CAr</h1>
+        <h1>Cars List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
@@ -29,23 +29,23 @@
             </div>
         </form>
     </div>
-    <div style="overflow-x">
-        <table class="table table-hover table-header-fixed" style="overflow-x">
+    @*<div style="overflow:scroll "></div>*@
+        <table >
         <thead>
             <tr>
-                <th scope="col">Car Image</th>
+                <th scope="col">Image</th>
 
-                <th scope="col">Car Name</th>
-                <th scope="col">Brand Name</th>
+                <th scope="col">CarName</th>
+                <th scope="col">Brand</th>
                 <th scope="col">Model</th>
                 <th scope="col">Year</th>
-                <th scope="col">Transmission Type</th>
-                <th scope="col">Fuel Type</th>
-                <th scope="col">Vehicle no.</th>
+                <th scope="col">Transmission</th>
+                <th scope="col">Fuel</th>
+                <th scope="col">VehicleNo.</th>
                 <th scope="col">Rent</th>
                 <th scope="col">Availbility</th>
-                <th class="text-center">Created</th>
-                <th class="text-center">Modified</th>
+             @*   <th class="text-center">Created</th>
+                <th class="text-center">Modified</th>*@
                 <th class="text-center">Actions</th>
             </tr>
         </thead>
@@ -53,19 +53,19 @@
             @foreach (DataRow dataRow in Model.Rows)
             {
                 <tr>
-                    <td><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%; height:80px; width:80px;" /></td>
+                    <td><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 20%; height:60px; width:1500px;" /></td>
 
                     <td>@dataRow["CarName"]</td>
                     <td>@dataRow["BrandName"]</td>
                     <td>@dataRow["Model"]</td>
-                    <td>@Convert.ToInt64( dataRow["Year"].ToString())</td>
+                    <td>@Convert.ToInt32( dataRow["Year"].ToString())</td>
                     <td>@dataRow["TransmissionType"]</td>
                     <td>@dataRow["FuelType"]</td>
                     <td>@dataRow["VehicleNo"]</td>
                     <td>@Convert.ToDouble(dataRow["Rent"].ToString())rs.</td>
                     <td>@dataRow["Availability"]</td>
-                    <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
-                    <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
+                    @*<td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
+                    <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>*@
                     <td class="justify-content-center">
                         <div class="d-flex">
                             <div class="me-2">
@@ -86,7 +86,7 @@
             }
         </tbody>
         </table>
-    </div>
+    
 </main>
 
 @section Scripts{

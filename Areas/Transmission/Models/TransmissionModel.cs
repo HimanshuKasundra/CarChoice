@@ -16,7 +16,11 @@ namespace CarChoice.Areas.Transmission.Models
         public DateTime Modified { get; set; }
     }
 
-
+    public class TransmissionDropDownModel
+    {
+        public int TransmissionID { get; set; }
+        public string TransmissionType { get; set; }
+    }
 }
 
 
