@@ -18,18 +18,22 @@
             return _HttpContextAccessor.HttpContext.Session.GetString("UserName");
         }
 
-        public static string FirstName()
+        public static string? FirstName()
         {
             return _HttpContextAccessor.HttpContext.Session.GetString("FirstName");
         }
-
-		public static string? ImageURL()
+        public static string LastName()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("LastName");
+        }
+        
+        public static string? ImageURL()
 		{
 			string? ImageURL = null;
 			if (_HttpContextAccessor.HttpContext.Session.GetString("ImageURL") != null)
 			{
 				ImageURL =
-			   _HttpContextAccessor.HttpContext.Session.GetString("ImageURL").ToString();
+			   _HttpContextAccessor.HttpContext.Session.GetString("ImageURL");
 			}
 
 			return ImageURL;

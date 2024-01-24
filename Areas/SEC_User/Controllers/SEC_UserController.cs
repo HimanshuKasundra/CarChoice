@@ -54,8 +54,8 @@ namespace CarChoice.Areas.SEC_User.Controllers
 						HttpContext.Session.SetString("Email", dr["Email"].ToString());
 						HttpContext.Session.SetString("UserName", dr["UserName"].ToString());
                         HttpContext.Session.SetString("Password", dr["Password"].ToString());
-						HttpContext.Session.SetString("isAdmin", dr["IsAdmin"].ToString());
-						HttpContext.Session.SetString("isActive", dr["IsActive"].ToString());
+						HttpContext.Session.SetString("IsAdmin", dr["IsAdmin"].ToString());
+						HttpContext.Session.SetString("IsActive", dr["IsActive"].ToString());
 						break;
                     }
                 }
@@ -64,7 +64,8 @@ namespace CarChoice.Areas.SEC_User.Controllers
                     TempData["Error"] = "User Name or Password is invalid!";
                     return RedirectToAction("SEC_UserLogin");
                 }
-				if (HttpContext.Session.GetString("UserName") != null && HttpContext.Session.GetString("Password") != null && HttpContext.Session.GetString("UserName") == "Himanshu")
+				if (HttpContext.Session.GetString("UserName") != null && HttpContext.Session.GetString("Password") != null && HttpContext.Session.GetString("IsAdmin") =="True")
+
 				{
 					return RedirectToAction("SEC_AdminDashboard", "SEC_Admin", new { area = "SEC_Admin" });
 				}
