@@ -57,7 +57,7 @@ namespace CarChoice.DAL.SEC_User
                 else
                 {
 
-                    if (sEC_UserModel.UserImage != null)
+                    if (sEC_UserModel.CustomerImage != null)
                     {
                         string FilePath = "wwwroot\\Photos\\Users";
                         string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
@@ -65,13 +65,13 @@ namespace CarChoice.DAL.SEC_User
                         {
                             Directory.CreateDirectory(path);
                         }
-                        string fileNameWithPath = Path.Combine(path, sEC_UserModel.UserImage.FileName);
+                        string fileNameWithPath = Path.Combine(path, sEC_UserModel.CustomerImage.FileName);
 
-                        sEC_UserModel.UserImageURL = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + sEC_UserModel.UserImage.FileName;
+                        sEC_UserModel.CustomerImageURL = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + sEC_UserModel.CustomerImage.FileName;
 
                         using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
                         {
-                            sEC_UserModel.UserImage.CopyTo(fileStream);
+                            sEC_UserModel.CustomerImage.CopyTo(fileStream);
                         }
                     }
 
@@ -81,7 +81,7 @@ namespace CarChoice.DAL.SEC_User
                     sqlDB.AddInParameter(dbCMD1, "Email", SqlDbType.VarChar, sEC_UserModel.Email);
                     sqlDB.AddInParameter(dbCMD1, "UserName", SqlDbType.VarChar, sEC_UserModel.UserName);
                     sqlDB.AddInParameter(dbCMD1, "Password", SqlDbType.VarChar, sEC_UserModel.Password);
-                    sqlDB.AddInParameter(dbCMD1, "UserImageURL", SqlDbType.VarChar, sEC_UserModel.UserImageURL);
+                    sqlDB.AddInParameter(dbCMD1, "CustomerImageURL", SqlDbType.VarChar, sEC_UserModel.CustomerImageURL);
                     if (Convert.ToBoolean(sqlDB.ExecuteNonQuery(dbCMD1)))
                     {
                         return true;

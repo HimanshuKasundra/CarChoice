@@ -10,11 +10,13 @@
     <Folder Include="Areas\Brand\Data\" />
     <Folder Include="Areas\Car\Car\" />
     <Folder Include="Areas\Car\Data\" />
+    <Folder Include="Areas\Car_User\Controllers\" />
+    <Folder Include="Areas\Car_User\Data\" />
+    <Folder Include="Areas\Car_User\Models\" />
+    <Folder Include="Areas\Car_User\Views\" />
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Rent\Data\" />
-    <Folder Include="Areas\Reservation\Controllers\" />
     <Folder Include="Areas\Reservation\Data\" />
-    <Folder Include="Areas\Reservation\Models\" />
     <Folder Include="Areas\Reservation\Views\" />
     <Folder Include="Areas\SEC_Admin\Data\" />
     <Folder Include="Areas\SEC_Admin\Models\" />

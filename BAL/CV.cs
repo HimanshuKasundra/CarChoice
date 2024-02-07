@@ -5,17 +5,37 @@
         private static IHttpContextAccessor _HttpContextAccessor;
         static CV()
         {
-            _HttpContextAccessor = new HttpContextAccessor();
+             _HttpContextAccessor = new HttpContextAccessor();
         }
 
-        public static int? UserID()
+        public static int? CustomerID()
         {
-            return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("UserID"));
+            //         try
+            //         {
+            //             Console.WriteLine(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
+
+            //             if (_HttpContextAccessor.HttpContext.Session.GetString("CustomerID") != null)
+            //             {
+            //		Console.WriteLine(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
+
+            //		return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
+
+            //	}
+            //	else
+            //                 return 0;
+
+            //}catch(Exception ex)
+            //         {
+            //             return null;    
+            //         }
+            Console.WriteLine(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
+            return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
         }
 
-        public static string UserName()
+        public static string? UserName()
         {
             return _HttpContextAccessor.HttpContext.Session.GetString("UserName");
+
         }
 
         public static string? FirstName()

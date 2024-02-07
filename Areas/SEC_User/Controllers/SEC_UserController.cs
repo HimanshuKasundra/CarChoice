@@ -25,7 +25,7 @@ namespace CarChoice.Areas.SEC_User.Controllers
         public IActionResult Login(SEC_UserModel SEC_UserModel)
         {
             string error = null;
-            Console.WriteLine("Hello ", SEC_UserModel.UserName);
+            //Console.WriteLine("Hello ", SEC_UserModel.UserName);
             if (SEC_UserModel.UserName == null)
             {
                 error += "User Name is required";
@@ -48,7 +48,8 @@ namespace CarChoice.Areas.SEC_User.Controllers
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
-                        HttpContext.Session.SetString("UserID", dr["UserID"].ToString());
+                        
+                        HttpContext.Session.SetString("CustomerID", dr["CustomerID"].ToString());
                         HttpContext.Session.SetString("FirstName", dr["FirstName"].ToString());
                         HttpContext.Session.SetString("LastName", dr["LastName"].ToString());
 						HttpContext.Session.SetString("Email", dr["Email"].ToString());
@@ -56,8 +57,11 @@ namespace CarChoice.Areas.SEC_User.Controllers
                         HttpContext.Session.SetString("Password", dr["Password"].ToString());
 						HttpContext.Session.SetString("IsAdmin", dr["IsAdmin"].ToString());
 						HttpContext.Session.SetString("IsActive", dr["IsActive"].ToString());
-						break;
+                        Console.WriteLine(HttpContext.Session.GetString("UserName"));
+
+                        break;
                     }
+                    
                 }
                 else
                 {

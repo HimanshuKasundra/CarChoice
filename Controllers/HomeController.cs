@@ -1,9 +1,12 @@
-﻿using CarChoice.Models;
+﻿using CarChoice.BAL;
+using CarChoice.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Diagnostics;
 
 namespace CarChoice.Controllers
 {
+   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,7 +18,8 @@ namespace CarChoice.Controllers
 
         public IActionResult Index()
         {
-            return View();
+			//HttpContext.Session.SetString("CustomerID", DBNull.Value.ToString());
+			return View();
         }
 
         public IActionResult Privacy()

@@ -6,7 +6,7 @@ namespace CarChoice.Areas.SEC_User.Models
 
     public class SEC_UserModel
     {
-        public int UserID { get; set; }
+        public int CustomerID { get; set; }
 
 
         [Required]
@@ -26,9 +26,9 @@ namespace CarChoice.Areas.SEC_User.Models
 
         [Required]
         [Display (Name ="Choose your image")]
-        public IFormFile UserImage{ get; set; }
+        public IFormFile CustomerImage{ get; set; }
 
-		public string UserImageURL { get; set; }
+		public string CustomerImageURL { get; set; }
 
 		public DateTime Created { get; set; }
         public DateTime Modified { get; set; }

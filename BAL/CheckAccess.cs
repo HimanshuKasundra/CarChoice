@@ -11,8 +11,8 @@ namespace CarChoice.BAL
             string currentAction = rd.Values["action"].ToString();
             string currentController = rd.Values["controller"].ToString();
             //string currentArea = rd.DataTokens["area"].ToString();
-
-            if (filterContext.HttpContext.Session.GetString("UserID") == null)
+                            
+            if (filterContext.HttpContext.Session.GetString("CustomerID") == null)
             {
                 
                 filterContext.Result = new RedirectResult("~/SEC_User/SEC_User/SEC_UserLogin");
