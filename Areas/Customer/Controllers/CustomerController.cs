@@ -72,10 +72,12 @@ namespace CarChoice.Areas.Customer.Controllers
         #region Admin Details
         public IActionResult AdminDetails(int CustomerID)
         {
-            DataTable dt = customerDAL.dbo_PR_Customer_SelectByPK(CustomerID);
-            if (dt != null)
+            CustomerModel customerModel = customerDAL.dbo_PR_CustomerEdit_SelectByPK(CustomerID);
+
+            //DataTable dt = customerDAL.dbo_PR_Customer_SelectByPK(CustomerID);
+            if (customerModel != null)
             {
-                    return View("AdminDetailsEdit", dt);
+                    return View("AdminDetailsEdit", customerModel);
             }
             else
             {
@@ -100,7 +102,7 @@ namespace CarChoice.Areas.Customer.Controllers
         }
         #endregion
 
-        #region Country Insert & Country Update
+        #region CustomerSave
         public IActionResult CustomerSave(CustomerModel customerModel)
         {
 			Console.WriteLine(customerModel.CustomerID);
@@ -117,6 +119,22 @@ namespace CarChoice.Areas.Customer.Controllers
                 }
             
             return View("CustomerAddEdit");
+        }
+        #endregion
+
+
+        #region AdminSave
+        public IActionResult AdminSave(CustomerModel customerModel)
+        {
+            Console.WriteLine(customerModel.CustomerID);
+
+            if (customerDAL.dbo_PR_Customer_Save(customerModel))
+            {
+                
+                    return RedirectToAction("SEC_AdminDashboard","SEC_Admin", new { area="SEC_Admin" });
+            }
+
+            return View("AdminDetailsEdit");
         }
         #endregion
 

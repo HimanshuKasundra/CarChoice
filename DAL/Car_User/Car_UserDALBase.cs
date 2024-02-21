@@ -31,7 +31,7 @@ namespace CarChoice.DAL.Car_User
 
 
         #region Method : dbo.PR_CarDetails_SelectByPK
-        public Car_UserModel dbo_PR_CarDetails_SelectByPK(int? CarID)
+        public Car_UserModel dbo_PR_CarDetails_SelectByPK(int CarID)
         {
             Car_UserModel carModel = new Car_UserModel();
             try

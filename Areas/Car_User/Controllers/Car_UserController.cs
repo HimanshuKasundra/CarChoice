@@ -13,6 +13,7 @@ using System.Data.SqlClient;
 using System.Reflection;
 using CarChoice.DAL;
 using CarChoice.DAL.Car;
+using CarChoice.Areas.Customer.Models;
 
 namespace CarChoice.Areas.Car_User.Controllers
 {
@@ -81,11 +82,9 @@ namespace CarChoice.Areas.Car_User.Controllers
 
 
         #region Car Details
-
-
-        public IActionResult CarDetails_User(Car_UserModel car_UserModel)
+        public IActionResult CarDetails_User(int CarID)
         {
-
+            Console.WriteLine(CarID);
             #region  Car ComboBox
             ViewBag.BrandList = car_UserDAL.dbo_PR_BrandDetails_Combobox();
             ViewBag.TransmissionList = car_UserDAL.dbo_PR_TransmissionType_Combobox();
@@ -93,38 +92,44 @@ namespace CarChoice.Areas.Car_User.Controllers
             ViewBag.RentList = car_UserDAL.dbo_PR_RentDetails_Combobox();
             #endregion
 
-            string connectionStr = this.Configuration.GetConnectionString("ConnectionString");
-            DataTable dataTable = new DataTable();
-            SqlConnection sql = new SqlConnection(connectionStr);
-            sql.Open();
-            SqlCommand objCmd = sql.CreateCommand();
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "[PR_CarDetails_SelectByPk]";
-            objCmd.Parameters.AddWithValue("@CarID", car_UserModel.CarID);
-            SqlDataReader objSDR = objCmd.ExecuteReader();
-            dataTable.Load(objSDR);
-            Console.WriteLine("Count" + dataTable.Rows.Count);
-            return View("CarList_User", dataTable);
+            //string connectionStr = this.Configuration.GetConnectionString("ConnectionString");
+            //DataTable dataTable = new DataTable();
+            //SqlConnection sql = new SqlConnection(connectionStr);
+            //sql.Open();
+            //SqlCommand objCmd = sql.CreateCommand();
+            //objCmd.CommandType = CommandType.StoredProcedure;
+            //objCmd.CommandText = "[PR_CarDetails_SelectByPk]";
+            //objCmd.Parameters.AddWithValue("@CarID", car_UserModel.CarID);
+            //SqlDataReader objSDR = objCmd.ExecuteReader();
+            //dataTable.Load(objSDR);
+            //Console.WriteLine("Count" + dataTable.Rows.Count);
+            //return View("CarList_User", dataTable);
+
+
+            Car_UserModel carUserModel = car_UserDAL.dbo_PR_CarDetails_SelectByPK(CarID);
+
+            //DataTable dt = customerDAL.dbo_PR_Customer_SelectByPK(CustomerID);
+            if (carUserModel != null)
+            {
+                return View("CarDetails_User", carUserModel);
+            }
+            else
+            {
+                return View("CarList_User");
+            }
 
         }
         #endregion
 
+        public IActionResult Back()
+        {
+           
+                return RedirectToAction("CarList_User");
+
+        }
 
 
 
-
-        //public IActionResult CarDetails_User(int? CarID )
-        //{
-        //	DataTable dt = car_UserDAL.dbo_PR_CarDetails_SelectByPK(CarID);
-        //	if (dt != null)
-        //	{
-        //		return View("CarDetails_User", dt);
-        //	}
-        //	else
-        //	{
-        //		return View("CarDetails_User");
-        //	}
-        //}
 
     }
 }

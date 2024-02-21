@@ -27,7 +27,46 @@
         {
             return _HttpContextAccessor.HttpContext.Session.GetString("LastName");
         }
-        
+        public static string Email()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("Email");
+        }
+
+        public static string Address()
+        {
+            try {
+                return _HttpContextAccessor.HttpContext.Session.GetString("Address");
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+            
+        }
+
+        public static int Mobile()
+        {
+            try
+            {
+                return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("Mobile"));
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public static string LicenceNumber()
+        {
+            try
+            {
+                return _HttpContextAccessor.HttpContext.Session.GetString("LicenceNumber");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public static string? IsAdmin()
         {
             return _HttpContextAccessor.HttpContext.Session.GetString("IsAdmin");

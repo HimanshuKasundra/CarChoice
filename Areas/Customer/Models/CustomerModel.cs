@@ -54,7 +54,7 @@ namespace CarChoice.Areas.Customer.Models
 		public string LicenceImageURL { get; set; }
 
 		[Required]
-		[Display(Name = "LicenceImage field is required")]
+		
 
 		public IFormFile LicenceImage { get; set; }
 
@@ -63,7 +63,7 @@ namespace CarChoice.Areas.Customer.Models
 		public string CustomerImageURL { get; set; }
 
 		[Required]
-		[Display(Name = "CustomerImageURL field is required")]
+		
 
 		public IFormFile CustomerImage { get; set; }
 

@@ -50,7 +50,7 @@
                                 <button type="submit" class="btn btn-primary" value="Detals">Book</button>
                             </form>
                         </div>
-                      
+
                     </div>
                 </td>
             </tr>
@@ -58,49 +58,67 @@
     </tbody>
 </table>*@;
 <div style=" margin-top:60px;  margin-left:30px; ">
-@foreach (DataRow dataRow in Model.Rows)
-{
-<div class="row d-flex">
-    <div class="col-md-3">
-<div class="card  " style="padding-top:10px; padding-left:23px; width:16.5rem;" >
-            <img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style="  height:190px; width:16.5rem;" alt="..." />
-    @*<div class="card-body">
+    <div class="row">
+        @foreach (DataRow dataRow in Model.Rows)
+        {
+
+            <div class="col-md-3">
+                <div class="card  " style="padding-top:10px; padding-left:10px; width:16.5rem;">
+                    <img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style="  height:190px; width:16.5rem;" alt="..." />
+                    @*<div class="card-body">
                 <h4 class="card-title" style="font-family:'Times New Roman', Times, serif; font:500">@dataRow["CarName"]</h4>
                 <h5 class="card-text" style="font-family:'Times New Roman', Times, serif;">@dataRow["BrandName"]</h5>
-    </div>*@
-    <table>
-                <tr><td colspan="2" style="text-align:center; font-family:'Times New Roman'; font-size:xx-large; font-weight:700;">@dataRow["CarName"]</td> </tr>
-                <tr><td colspan="2" style="text-align:center; font-family:'Times New Roman'; font-size:x-large; font-weight:300;">@dataRow["BrandName"]</td></tr>
+                </div>*@
+                    <table>
+                        <tr><td colspan="2" style="text-align:center; font-family:'Times New Roman'; font-size:xx-large; font-weight:700;">@dataRow["CarName"]</td> </tr>
+                        <tr><td colspan="2" style="text-align:center; font-family:'Times New Roman'; font-size:x-large; font-weight:300;">@dataRow["BrandName"]</td></tr>
 
-                <tr class="col-md-6">
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium; color:grey; font:100">Transmission</td>
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium; color:grey; font:100">Fuel Type</td>
-        </tr>
-        <tr>
-                    <td class ="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:300">@dataRow["TransmissionType"]</td>
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:300">@dataRow["FuelType"]</td>
-         </tr>
-      </table>
-         
-        <table style="margin-top:15px;">
-        <tr>
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium;color:grey; font:100">Year</td>
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium;color:grey; font:100">Rent</td>
-        </tr>
-        <tr style="margin-top:3em;">
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:100">@dataRow["Year"]</td>
-                    <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:100">
-                        @Convert.ToDouble(dataRow["Rent"].ToString()) 
-                        <span>&#8377</span>/day
-                    </td>
-        </tr>
-    </table>
-            <p class="d-flex mb-0 d-block justify-content-center" style="padding-top:1em; padding-bottom:1em"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a asp-action="CarDetails_User" asp-area="Car_User" asp-controller="Car_User" asp-route-CarID="" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                        <tr class="col-md-6">
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium; color:grey; font:100">Transmission</td>
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium; color:grey; font:100">Fuel Type</td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:300">@dataRow["TransmissionType"]</td>
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:300">@dataRow["FuelType"]</td>
+                        </tr>
+                    </table>
 
-        </div>
-</div>
+                    <table style="margin-top:15px;">
+                        <tr>
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium;color:grey; font:100">Year</td>
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:medium;color:grey; font:100">Rent</td>
+                        </tr>
+                        <tr style="margin-top:3em;">
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:100">@dataRow["Year"]</td>
+                            <td class="col-md-6" style="font-family:'Times New Roman', Times, serif; text-align:center; font-size:large; font:100">
+                                @Convert.ToDouble(dataRow["Rent"].ToString())
+                                <span>&#8377</span>/day
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  class="justify-content-center  text-center">
+                                <div class="d-flex justify-content-center">
+                                    <div class="me-2">
+                                        <form asp-area="Car_User" asp-controller="Car_User" asp-action="CarAddEdit">
+                                            <input type="hidden" value="@Convert.ToInt32(dataRow["CarID"].ToString())" name="CarID" />
+                                            <button type="submit" class="btn btn-primary" value="Detals">Book</button>
+                                        </form>
+                                    </div>
+                                    <div class="ms-2">
+                                        <form method="post" asp-area="Car_User" asp-controller="Car_User" asp-action="CarDetails_User">
+                                            <input type="hidden" value="@Convert.ToInt32(dataRow["CarID"].ToString())" name="CarID" />
+                                            <button type="submit" class="btn btn-warning" value="Detals">Details</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
-</div>
-}
+                </div>
+            </div>
+
+        }
+    </div>
 
 </div>
