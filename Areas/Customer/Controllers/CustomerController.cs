@@ -50,7 +50,16 @@ namespace CarChoice.Areas.Customer.Controllers
             DataTable dt = customerDAL.dbo_PR_Customer_SelectByPK(CustomerID);
             if (dt != null)
             {
-                return View("CustomerDetails", dt);
+                Console.WriteLine(@CV.IsAdmin());
+                if(@CV.IsAdmin()=="True") {
+                    return View("Admin_CustomerDetails", dt);
+
+                }
+                else
+                {
+                    return View("CustomerDetails", dt);
+
+                }
             }
             else
             {
@@ -59,13 +68,30 @@ namespace CarChoice.Areas.Customer.Controllers
         }
         #endregion
 
-        #region Customer Details for Edit
-        public IActionResult EditCustomerDetails(int CustomerID = 0)
+
+        #region Admin Details
+        public IActionResult AdminDetails(int CustomerID)
         {
+            DataTable dt = customerDAL.dbo_PR_Customer_SelectByPK(CustomerID);
+            if (dt != null)
+            {
+                    return View("AdminDetailsEdit", dt);
+            }
+            else
+            {
+                return View("SEC_AdminDashboard","SEC_Admin");
+            }
+        }
+        #endregion
+
+        #region Customer Details for Edit
+        public IActionResult EditCustomerDetails(int CustomerID)
+        {
+            Console.WriteLine(CustomerID);
             CustomerModel customerModel = customerDAL.dbo_PR_CustomerEdit_SelectByPK(CustomerID);
             if (customerModel != null)
             {
-                return View("CustomerDetails", customerModel);
+                return View("CustomerAddEdit", customerModel);
             }
             else
             {
@@ -77,21 +103,52 @@ namespace CarChoice.Areas.Customer.Controllers
         #region Country Insert & Country Update
         public IActionResult CustomerSave(CustomerModel customerModel)
         {
-            if (ModelState.IsValid)
-            {
-                if (customerDAL.dbo_PR_Customer_Save(customerModel))
+			Console.WriteLine(customerModel.CustomerID);
+
+			if (customerDAL.dbo_PR_Customer_Save(customerModel))
                 {
                     if (customerModel.CustomerID == 0)
                     {
                         //TempData["CountryInsertMsg"] = "Record Inserted Successfully";
-                        return RedirectToAction("CustomerList");
+                        return RedirectToAction("CustomerDetails","Customer");
                     }
                     else
-                        return RedirectToAction("CustomerList");
+                        return RedirectToAction("Index","Home");
                 }
-            }
+            
             return View("CustomerAddEdit");
         }
         #endregion
+
+
+
+        #region Admin Details for Edit
+        public IActionResult EditAdminDetails(int CustomerID)
+        {
+            Console.WriteLine(CustomerID);
+            CustomerModel customerModel = customerDAL.dbo_PR_CustomerEdit_SelectByPK(CustomerID);
+            if (customerModel != null)
+            {
+                return View("AdminDetailsEdit", customerModel);
+            }
+            else
+            {
+                return View("SEC_AdminDashboard","SEC_Admin");
+            }
+        }
+        #endregion
+
+        public IActionResult Back()
+        {
+            if (@CV.IsAdmin() == "True")
+            {
+                return RedirectToAction("CustomerList");
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace CarChoice.Areas.Brand.Models
 {
     public class BrandModel
     {
+        
         public int BrandID { get; set; }
 
         [Required]
@@ -14,7 +15,8 @@ namespace CarChoice.Areas.Brand.Models
         [Required]
         [DisplayName("Brand Logo")]
         public string? BrandLogo { get; set; }
-
+        [Required]
+        [DisplayName("Brand Logo")]
         public IFormFile Logo { get; set; } 
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
@@ -22,6 +24,7 @@ namespace CarChoice.Areas.Brand.Models
 
     public class BrandDropDownModel
     {
+
         public int BrandID { get; set; }
         public string? BrandName { get; set; }
     }

@@ -31,13 +31,13 @@
             </div>
         </form>
     </div>
-
-<table class="table table-hover table-header-fixed">
+    <div style="overflow:scroll ">
+        <table class="table table-hover table-bordered  table-header-fixed">
     <thead>
         <tr>
-                <th scope="col">Brand Logo</th>
+                    <th scope="col" class="text-center">Brand Logo</th>
 
-            <th scope="col">Brand Name</th>
+                    <th scope="col" class="text-center">Brand Name</th>
             <th class="text-center">Created</th>
             <th class="text-center">Modified</th>
             <th class="text-center">Actions</th>
@@ -47,17 +47,17 @@
         @foreach (DataRow dataRow in Model.Rows)
         {
             <tr>
-                    <td><img src=@Url.Content(@dataRow["BrandLogo"].ToString()) class="img-thumbnail" style=" border-radius: 50%; height:80px; width:80px;" /></td>
+                        <td class="text-center"><img src=@Url.Content(@dataRow["BrandLogo"].ToString()) class="img-thumbnail text-center" style=" border-radius: 50%; height:80px; width:80px;" /></td>
 
-                <td>@dataRow["BrandName"]</td>
+                        <td class="text-center">@dataRow["BrandName"]</td>
                 <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
                 <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
                 <td class="text-center">
-                       
-                            <div class="me-2">
+
+                            <div class=" text-center">
                             <form method="post" asp-area="Brand" asp-controller="Brand" asp-action="BrandAddEdit">
                                     <input type="hidden" value="@Convert.ToInt32(dataRow["BrandID"].ToString())" name="BrandID" />
-                                    <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
+                                    <button type="submit" class="btn btn-warning text-center" value="Detals">Edit</button>
                                 </form>
                             </div>
                     
@@ -66,6 +66,7 @@
         }
     </tbody>
 </table>
+</div>
 </main>
 @*@section Scripts {
     @{

@@ -1,9 +1,11 @@
-﻿using System.Data.Common;
+﻿
+using System.Data.Common;
 using System.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.AspNetCore.Hosting;
 using CarChoice.Areas.SEC_User.Models;
+using CarChoice.Areas.Customer.Models;
 
 namespace CarChoice.DAL.SEC_User
 {
@@ -98,5 +100,45 @@ namespace CarChoice.DAL.SEC_User
             }
         }
         #endregion
+
+        #region Method : dbo.PR_User_SelectByPK
+        public SEC_UserModel dbo_PR_SEC_User_SelectByPK(int? CustomerID)
+        {
+            SEC_UserModel sECUserModel = new SEC_UserModel();
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_UserDetails_SelectByPk");
+                sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, CustomerID);
+                DataTable dataTable = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dataTable.Load(dataReader);
+                }
+
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    sECUserModel.CustomerID = Convert.ToInt32(dataRow["CustomerID"]);
+                    sECUserModel.FirstName = dataRow["FirstName"].ToString();
+                    sECUserModel.LastName = dataRow["LastName"].ToString();
+                    sECUserModel.Email = dataRow["Email"].ToString();
+                    sECUserModel.UserName = dataRow["UserName"].ToString();
+                    sECUserModel.Password = dataRow["Password"].ToString();
+                    
+                    sECUserModel.CustomerImageURL = dataRow["CustomerImageURL"].ToString();
+                    sECUserModel.Created = Convert.ToDateTime(dataRow["Created"].ToString());
+                    sECUserModel.Modified = Convert.ToDateTime(dataRow["Modified"].ToString());
+                }
+                return sECUserModel;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
+      
+
     }
 }

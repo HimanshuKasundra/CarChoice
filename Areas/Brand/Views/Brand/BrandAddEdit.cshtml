@@ -32,8 +32,9 @@
             <div class="custom-file">
                 <input class="form-control" id="coverphoto" autofocus asp-for="Logo" class="custom-file-input" id="customFile" required>
                 <label class="custome-file-label" for="customFile"></label>
+                <div class="invalid-feedback">Please Choose file for photo</div>
             </div>
-            <div class="invalid-feedback">Please Choose file for photo</div>
+            @*<div class="invalid-feedback">Please Choose file for photo</div>*@
             <span asp-validation-for="Logo" class="text-danger"></span>
         </div>
 

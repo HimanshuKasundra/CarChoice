@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = " Customer Details";
-    Layout = "~/Views/Shared/_Layout_CustomerDetails.cshtml";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
 @using System.Data
@@ -12,7 +12,7 @@
 
     <section class="section profile justify-content-center;">
         <div class="row">
-            <div class="col-xl-2">
+            <div class="col-xl-4">
 
                 <div class="card">
                     <div class="card-body  pt-3 d-flex flex-column align-items-center">
@@ -24,7 +24,7 @@
 
             </div>
 
-            <div class="col-xl-6">
+            <div class="col-xl-8">
 
                 <div class="card">
                     <div class="card-body pt-3">
@@ -76,7 +76,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4 label" style=" color:black;">LicenceNumber</div>
                                     <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["LicenceNumber"]</div>
-                                 </div>
+                                </div>
 
                                 <div class=" row d-flex justify-content-center">
                                     <div class="col-3 ms-4 justify-content-center">
@@ -84,19 +84,14 @@
                                             <button type="submit" class="btn btn-primary" value="Detals">Back</button>
                                         </form>
                                     </div>
-                                    
-                                    <div class=" col me-4">
-                                        <form asp-area="Customer" asp-controller="Customer" asp-action="EditCustomerDetails">
-                                            <input type="hidden" value="@Convert.ToInt32(Model.Rows[0]["CustomerID"].ToString())" name="CustomerID" />
-                                            <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
-                                        </form>
-                                    </div>
-                                    
+
+                                   
+
                                 </div>
 
                             </div>
 
-                           
+
 
 
                         </div><!-- End Bordered Tabs -->
@@ -108,7 +103,7 @@
         </div>
     </section>
 
-   
+
 
 </main><!-- End #main -->
 @*@section Scripts {

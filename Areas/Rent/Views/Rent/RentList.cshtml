@@ -31,38 +31,38 @@
             </div>
         </form>
     </div>
-
-    <table class="table table-hover table-header-fixed">
+    <div style="overflow:scroll ">
+        <table class="table table-hover table-bordered  table-header-fixed">
         <thead>
             <tr>
-                <th scope="col">Rent Id</th>
+                    <th scope="col" class="text-center">Rent Id</th>
 
-                <th scope="col">Rent </th>
-                <th scope="col">Car type</th>
-                <th class="text-center">Created</th>
-                <th class="text-center">Modified</th>
-                <th class="text-center">Actions</th>
+                    <th scope="col" class="text-center">Rent </th>
+                    <th scope="col" class="text-center">Car type</th>
+                    <th scope="col"  class="text-center">Created</th>
+                    <th scope="col"  class="text-center">Modified</th>
+                    <th scope="col" class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody id="sample_2">
             @foreach (DataRow dataRow in Model.Rows)
             {
                 <tr>
-                    <td>@dataRow["RentID"]</td>
-                    <td>@dataRow["Rent"]</td>
-                    <td>@dataRow["CarType"]</td>
+                    <td class="text-center">@dataRow["RentID"]</td>
+                        <td class="text-center">@dataRow["Rent"]</td>
+                        <td class="text-center">@dataRow["CarType"]</td>
 
                     <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
                     <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
-                    <td class="justify-content-center">
-                        <div class="d-flex">
-                            <div class="me-2">
+                    <td class="justify-content-center text-center">
+                            <div class="d-flex justify-content-center">
+                            <div class="me-2 text-center">
                                 <form method="post" asp-area="Rent" asp-controller="Rent" asp-action="RentAddEdit">
                                     <input type="hidden" value="@Convert.ToInt32(dataRow["RentID"].ToString())" name="RentID" />
                                     <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
                                 </form>
                             </div>
-                            <div class="ms-2">
+                            <div class="ms-2 text-center">
                                 <form asp-area="Rent" asp-controller="Rent" asp-action="RentDelete">
                                     <input type="hidden" value="@Convert.ToInt32(dataRow["RentID"].ToString())" name="RentID" />
                                     <button type="submit" class="btn btn-danger" value="Detals">Delete</button>
@@ -74,6 +74,7 @@
             }
         </tbody>
     </table>
+    </div>
 </main>
 
 @*@section Scripts {

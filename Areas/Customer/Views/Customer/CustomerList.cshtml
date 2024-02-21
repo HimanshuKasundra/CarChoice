@@ -7,34 +7,43 @@
 @model DataTable
 @using CarChoice.Areas.Customer.Models
 <main id="main" class="main">
-<div class="container-fluid">
+
+    <div class="pagetitle">
+        <h1>Customers List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door"></i></a></li>
+                <li class="breadcrumb-item"><a asp-controller="Car" asp-area="Car" asp-action="Car">Car List</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div style="overflow:scroll ">
     <table class="table table-bordered table-hover ">
         <thead>
             <tr>
-                <th scope="col">Customer Image</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Mobile number</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="text-center">Customer Image</th>
+                <th scope="col" class="text-center">First Name</th>
+                <th scope="col" class="text-center">Last Name</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Mobile number</th>
+                <th scope="col" class="text-center">Action</th>
             </tr>
         </thead>
 
         <tbody id="sample_2">
             @foreach (DataRow dr in Model.Rows)
             {
-                    Console.WriteLine(@dr["CustomerImageURL"]);
                     <tr>
-                    <td><img src=@Url.Content(@dr["CustomerImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%; height:80px; width:80px;" /></td>
-                    <td>@dr["FirstName"]</td>
-                    <td>@dr["LastName"]</td>
-                    <td>@dr["Email"]</td>
-                    <td>@dr["Mobile"]</td>
+                        <td class="text-center"><img src=@Url.Content(@dr["CustomerImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%; height:80px; width:80px;" /></td>
+                        <td class="text-center">@dr["FirstName"]</td>
+                        <td class="text-center">@dr["LastName"]</td>
+                        <td class="text-center">@dr["Email"]</td>
+                        <td class="text-center">@dr["Mobile"]</td>
                   
-                    <td class="justify-content-center">
-                            <div class="d-flex">
+                    <td class="justify-content-center text-center">
+                            <div class="d-flex justify-content-center">
                                 <div class="me-2">
-                                    <form  asp-area="Customer" asp-controller="Customer" asp-action="CustomerDetails">
+                                    <form asp-area="Customer" asp-controller="Customer" asp-action="CustomerDetails">
                                         <input type="hidden" value="@Convert.ToInt32(dr["CustomerID"].ToString())" name="CustomerID" />
                                         <button type="submit" class="btn btn-warning" value="Detals">Details</button>
                                     </form>

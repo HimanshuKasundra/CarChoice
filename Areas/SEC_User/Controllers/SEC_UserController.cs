@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using CarChoice.DAL.SEC_User;
+using CarChoice.Areas.Customer.Models;
+using CarChoice.DAL.Customer;
 
 namespace CarChoice.Areas.SEC_User.Controllers
 {
@@ -37,7 +39,7 @@ namespace CarChoice.Areas.SEC_User.Controllers
 
             if (error != null)
             {
-                TempData["Error"] = error;
+                TempData["Error"] = "UserName or Password is Incorrect";
                 return RedirectToAction("SEC_UserLogin");
             }
             else
@@ -107,6 +109,23 @@ namespace CarChoice.Areas.SEC_User.Controllers
             return RedirectToAction("SEC_UserLogin");
         }
 
-        #endregion 
+		#endregion
+		SEC_UserDAL SEC_UserDAL = new SEC_UserDAL();
+
+        //#region Customer Details for Edit
+        //public IActionResult SEC_UserEditDetails(int CustomerID = 0)
+        //{
+
+        //    SEC_UserModel sEC_UserModel = SEC_UserDAL.dbo_PR_CustomerEdit_SelectByPK(CustomerID);
+        //    if (sEC_UserModel != null)
+        //    {
+        //        return View("SEC_UserEditDetails", sEC_UserModel);
+        //    }
+        //    else
+        //    {
+        //        return View("SEC_UserEditDetails");
+        //    }
+        //}
+        //#endregion
     }
 }

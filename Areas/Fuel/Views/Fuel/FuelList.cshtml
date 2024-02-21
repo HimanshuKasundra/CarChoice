@@ -32,35 +32,35 @@
             </div>
         </form>
     </div>
-
-    <table class="table table-hover table-header-fixed">
+    <div style="overflow:scroll ">
+        <table class="table table-hover table-bordered table-header-fixed">
         <thead>
             <tr>
-                <th scope="col">Fuel Id</th>
+                    <th scope="col" class="text-center">Fuel Id</th>
 
-                <th scope="col">Fuel Type</th>
-                <th class="text-center">Created</th>
-                <th class="text-center">Modified</th>
-                <th class="text-center">Actions</th>
+                    <th scope="col" class="text-center">Fuel Type</th>
+                    <th scope="col"  class="text-center">Created</th>
+                    <th scope="col" class="text-center">Modified</th>
+                    <th scope="col" class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody id="sample_2">
             @foreach (DataRow dataRow in Model.Rows)
             {
                 <tr>
-                    <td>@dataRow["FuelID"]</td>
-                    <td>@dataRow["FuelType"]</td>
+                    <td class="text-center">@dataRow["FuelID"]</td>
+                     <td class="text-center">@dataRow["FuelType"]</td>
                     <td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
                     <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>
                     <td class="justify-content-center">
-                        <div class="d-flex">
-                            <div class="me-2">
+                            <div class="d-flex justify-content-center">
+                            <div class="me-3">
                                 <form method="post" asp-area="Fuel" asp-controller="Fuel" asp-action="FuelAddEdit">
                                     <input type="hidden" value="@Convert.ToInt32(dataRow["FuelID"].ToString())" name="FuelID" />
                                     <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
                                 </form>
                             </div>
-                        <div class="ms-2">
+                        <div class="ms-3">
                             <form asp-area="Fuel" asp-controller="Fuel" asp-action="FuelDelete">
                                 <input type="hidden" value="@Convert.ToInt32(dataRow["FuelID"].ToString())" name="FuelID" />
                                 <button type="submit" class="btn btn-danger" value="Detals">Delete</button>
@@ -72,6 +72,7 @@
             }
         </tbody>
     </table>
+    </div>
 </main>
 
 @*@section Scripts {

@@ -93,7 +93,7 @@
                 <select class="form-control" asp-for="RentID" asp-items="@(new SelectList(ViewBag.RentList,"RentID","CarType","Rent"))">
                     <option value="">Select Rent</option>
                 </select>
-                <span asp-validation-for="Rent" class="text-danger"></span>
+                <span asp-validation-for="RentID" class="text-danger"></span>
                 <label for="floatingSelect">Rent</label>
             </div>
         </div>

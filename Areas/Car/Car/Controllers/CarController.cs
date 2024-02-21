@@ -1,10 +1,12 @@
 ﻿using CarChoice.Areas.Car.Models;
+using CarChoice.BAL;
 using CarChoice.DAL.Car;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
 namespace CarChoice.Areas.Car.Controllers
 {
+    [CheckAccess]
     [Area("Car")]
     [Route("Car/[controller]/[action]")]
     public class CarController : Controller

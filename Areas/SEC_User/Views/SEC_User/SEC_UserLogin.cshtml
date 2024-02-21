@@ -60,6 +60,8 @@
 						<!--begin::Heading-->
 					<div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">							
 						<!--begin::Heading-->
+							
+
 						<form class="row g-1 needs-validation" asp-area="SEC_User" asp-action="Login" asp-controller="SEC_User">
 							
 							<div class="text-center mb-11">
@@ -86,9 +88,15 @@
 								<span asp-validation-for="Password" class="text-danger"></span>
 								<div class="invalid-feedback">Please enter your password!</div>
 							</div>
+								@if (TempData["Error"] != null)
+								{
+									<div class="text-danger">
+										@Html.Raw(Convert.ToString(TempData["Error"]))
+									</div>
+								}
 
 							<div class="col-12">
-								<button class="btn btn-primary w-100 mb-3" type="submit">Login</button>
+								<button class="btn btn-primary w-100 mb-3" type="submit" style="margin-top:20px">Login</button>
 							</div>
 
 							<div class="col-12">
@@ -109,8 +117,3 @@
 	<!--end::Authentication - Sign-in-->
 </div>
 </main>
-@*@section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
-}*@

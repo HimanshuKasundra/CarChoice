@@ -1,4 +1,5 @@
 ﻿using CarChoice.BAL;
+using CarChoice.DAL.Car;
 using CarChoice.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -16,10 +17,23 @@ namespace CarChoice.Controllers
             _logger = logger;
         }
 
+        #region Car List
+        CarDAL carDAL = new CarDAL();
         public IActionResult Index()
         {
-			//HttpContext.Session.SetString("CustomerID", DBNull.Value.ToString());
-			return View();
+                #region  Car ComboBox
+                ViewBag.BrandList = carDAL.dbo_PR_BrandDetails_Combobox();
+                ViewBag.TransmissionList = carDAL.dbo_PR_TransmissionType_Combobox();
+                ViewBag.FuelList = carDAL.dbo_PR_FuelType_Combobox();
+                ViewBag.RentList = carDAL.dbo_PR_RentDetails_Combobox();
+                #endregion
+
+                DataTable dataTable = carDAL.dbo_PR_CarDetails_SelectAll();
+
+                return View(dataTable);
+            
+            #endregion
+            return View();
         }
 
         public IActionResult Privacy()

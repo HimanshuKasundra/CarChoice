@@ -23,7 +23,8 @@
         public int RentID { get; set; }
         public string CarType { get; set; }
         public string CarImageURL { get; set; }
-
+        public DateTime PickupDate { get; set; }
+        public DateTime ReturnDate { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
     }

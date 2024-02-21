@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data.Common;
 using System.Data;
-using CarChoice.Areas.Car.Models;
+using CarChoice.Areas.Car_User.Models;
 
 namespace CarChoice.DAL.Car_User
 {
@@ -31,9 +31,9 @@ namespace CarChoice.DAL.Car_User
 
 
         #region Method : dbo.PR_CarDetails_SelectByPK
-        public CarModel dbo_PR_CarDetails_SelectByPK(int? CarID)
+        public Car_UserModel dbo_PR_CarDetails_SelectByPK(int? CarID)
         {
-            CarModel carModel = new CarModel();
+            Car_UserModel carModel = new Car_UserModel();
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
@@ -67,7 +67,49 @@ namespace CarChoice.DAL.Car_User
                 return null;
             }
         }
-        #endregion
+		#endregion
 
-    }
+
+
+
+		//        #region Method : dbo.PR_CarDetails_SelectAll_Datewise
+		//        public Car_UserModel dbo_PR_CarDetails_SelectAll_Datewise(DateTime? PickupDate, DateTime? ReturnDate)
+		//        {
+		//            Car_UserModel carUserModel = new Car_UserModel();
+		//            try
+		//            {
+		//                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+		//                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CarDetails_SelectAll_Datewise");
+		//                sqlDatabase.AddInParameter(dbCommand, "@PickupDate", DbType.DateTime, PickupDate);
+		//                sqlDatabase.AddInParameter(dbCommand, "@ReturnDate", DbType.DateTime, ReturnDate);
+
+		//                DataTable dataTable = new DataTable();
+		//                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+		//                {
+		//                    dataTable.Load(dataReader);
+		//                }
+		//                foreach (DataRow dataRow in dataTable.Rows)
+		//                {
+		//                    carUserModel.CarName = dataRow["CarName"].ToString();
+		//                    carUserModel.BrandID = Convert.ToInt32(dataRow["BrandID"]);
+		//                    carUserModel.Model = dataRow["Model"].ToString();
+		//                    carUserModel.Year = Convert.ToInt32(dataRow["Year"]);
+		//                    carUserModel.TransmissionID = Convert.ToInt32(dataRow["TransmissionID"]);
+		//                    carUserModel.FuelID = Convert.ToInt32(dataRow["FuelID"]);
+		//                    carUserModel.Availability = dataRow["Availability"].ToString();
+		//                    carUserModel.VehicleNo = dataRow["VehicleNo"].ToString();
+		//                    carUserModel.RentID = Convert.ToInt32(dataRow["RentID"]);
+		//                    carUserModel.CarImageURL = dataRow["CarImageURL"].ToString();
+
+		//                }
+		//                return carUserModel;
+		//            }
+		//            catch (Exception ex)
+		//            {
+		//                return null;
+		//            }
+		//        }
+		//#endregion
+
+	}
 }

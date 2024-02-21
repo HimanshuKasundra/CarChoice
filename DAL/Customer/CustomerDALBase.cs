@@ -1,4 +1,5 @@
-﻿using CarChoice.Areas.Customer.Models;
+﻿using CarChoice.Areas.Car.Models;
+using CarChoice.Areas.Customer.Models;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Data;
@@ -53,6 +54,40 @@ namespace CarChoice.DAL.Customer
             SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
             try
             {
+                if (customerModel.CustomerImage != null)
+                {
+                    string FilePath = "wwwroot\\Photos\\Customers";
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    string fileNameWithPath = Path.Combine(path, customerModel.CustomerImage.FileName);
+                    customerModel.CustomerImageURL = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + customerModel.CustomerImage.FileName;
+
+                    using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                    {
+                        customerModel.CustomerImage.CopyTo(fileStream);
+                    }
+                }
+
+                if (customerModel.LicenceImage != null)
+                {
+                    string FilePath = "wwwroot\\Photos\\Customers";
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), FilePath);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    string fileNameWithPath = Path.Combine(path, customerModel.LicenceImage.FileName);
+                    customerModel.LicenceImageURL = "~" + FilePath.Replace("wwwroot\\", "/") + "/" + customerModel.LicenceImage.FileName;
+
+                    using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
+                    {
+                        customerModel.LicenceImage.CopyTo(fileStream);
+                    }
+                }
+
                 if (customerModel.CustomerID == 0)
                 {
                     DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Customer_Insert");
@@ -64,15 +99,16 @@ namespace CarChoice.DAL.Customer
                     sqlDatabase.AddInParameter(dbCommand, "@LicenceNumber", DbType.String, customerModel.LicenceNumber);
                     sqlDatabase.AddInParameter(dbCommand, "@LicenceImageURL", DbType.String, customerModel.LicenceImageURL);
                     sqlDatabase.AddInParameter(dbCommand, "@CustomerImageURL", DbType.String, customerModel.CustomerImageURL);
+                    sqlDatabase.AddInParameter(dbCommand, "@Email", DbType.String, customerModel.Email);
                     sqlDatabase.AddInParameter(dbCommand, "@Created", DbType.DateTime, DBNull.Value);
-                    sqlDatabase.AddInParameter(dbCommand, "@Modified", DbType.Int64, DBNull.Value);
+                    sqlDatabase.AddInParameter(dbCommand, "@Modified", DbType.DateTime, DBNull.Value);
                     sqlDatabase.ExecuteNonQuery(dbCommand);
                     return true;
                 }
                 else
                 {
-                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Country_UpdateByPK");
-                    sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.String, customerModel.CustomerID);
+                    DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Customer_UpdateByPK");
+                    sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, customerModel.CustomerID);
                     sqlDatabase.AddInParameter(dbCommand, "@FirstName", DbType.String, customerModel.FirstName);
                     sqlDatabase.AddInParameter(dbCommand, "@LastName", DbType.String, customerModel.LastName);
                     sqlDatabase.AddInParameter(dbCommand, "@Email", DbType.String, customerModel.Email);
@@ -81,7 +117,8 @@ namespace CarChoice.DAL.Customer
                     sqlDatabase.AddInParameter(dbCommand, "@LicenceNumber", DbType.String, customerModel.LicenceNumber);
                     sqlDatabase.AddInParameter(dbCommand, "@LicenceImageURL", DbType.String, customerModel.LicenceImageURL);
                     sqlDatabase.AddInParameter(dbCommand, "@CustomerImageURL", DbType.String, customerModel.CustomerImageURL);
-                    sqlDatabase.AddInParameter(dbCommand, "@Modified", DbType.Int64, DBNull.Value);
+                    sqlDatabase.AddInParameter(dbCommand, "@UserName", DbType.String, customerModel.UserName);
+                    sqlDatabase.AddInParameter(dbCommand, "@Password", DbType.String, customerModel.Password);
                     sqlDatabase.ExecuteNonQuery(dbCommand);
                     return true;
                 }
@@ -101,7 +138,7 @@ namespace CarChoice.DAL.Customer
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
                 DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Customer_SelectByPK");
-                sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int64, CustomerID);
+                sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, CustomerID);
                 DataTable dt = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {
@@ -124,19 +161,23 @@ namespace CarChoice.DAL.Customer
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Customer_SelectByPK");
-                sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int64, CustomerID);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_Customer_SelectByPk");
+                sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, CustomerID);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
                 {
                     dataTable.Load(dataReader);
                 }
+               
                 foreach (DataRow dataRow in dataTable.Rows)
                 {
                     customerModel.CustomerID = Convert.ToInt32(dataRow["CustomerID"]);
                     customerModel.FirstName = dataRow["FirstName"].ToString();
                     customerModel.LastName = dataRow["LastName"].ToString();
                     customerModel.Email = dataRow["Email"].ToString();
+                    customerModel.UserName = dataRow["UserName"].ToString();
+                    customerModel.Password = dataRow["Password"].ToString();
+
                     customerModel.Mobile = dataRow["Mobile"].ToString();
                     customerModel.Address = dataRow["Address"].ToString();
                     customerModel.LicenceNumber = dataRow["LicenceNumber"].ToString();

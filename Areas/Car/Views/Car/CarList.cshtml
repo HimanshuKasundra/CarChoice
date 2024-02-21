@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "CAr List";
+    ViewData["Title"] = "Car List";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
@@ -30,20 +30,20 @@
         </form>
     </div>
    <div style="overflow:scroll ">
-    <table class="table table-hover table-header-fixed">
+    <table class="table table-hover table-bordered  table-header-fixed">
         <thead>
             <tr>
-                <th scope="col">Image</th>
+                    <th scope="col" class="text-center">Image</th>
 
-                <th scope="col">CarName</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Model</th>
-                <th scope="col">Year</th>
-                <th scope="col">Transmission</th>
-                <th scope="col">Fuel</th>
-                <th scope="col">VehicleNo.</th>
-                <th scope="col">Rent</th>
-                <th scope="col">Availbility</th>
+                    <th scope="col" class="text-center" =>CarName</th>
+                    <th scope="col" class="text-center" =>Brand</th>
+                    <th scope="col" class="text-center" =>Model</th>
+                    <th scope="col" class="text-center" =>Year</th>
+                    <th scope="col" class="text-center" =>Transmission</th>
+                    <th scope="col" class="text-center" =>Fuel</th>
+                    <th scope="col" class="text-center" =>VehicleNo.</th>
+                    <th scope="col" class="text-center" =>Rent</th>
+                    <th scope="col" class="text-center" =>Availbility</th>
              @*   <th class="text-center">Created</th>
                 <th class="text-center">Modified</th>*@
                 <th class="text-center">Actions</th>
@@ -53,21 +53,21 @@
             @foreach (DataRow dataRow in Model.Rows)
             {
                 <tr>
-                    <td><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 20%; height:60px; width:1500px;" /></td>
+                    <td class="text-center"><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 20%; height:90px; width:1500px;" /></td>
 
-                    <td>@dataRow["CarName"]</td>
-                    <td>@dataRow["BrandName"]</td>
-                    <td>@dataRow["Model"]</td>
-                    <td>@Convert.ToInt32( dataRow["Year"].ToString())</td>
-                    <td>@dataRow["TransmissionType"]</td>
-                    <td>@dataRow["FuelType"]</td>
-                    <td>@dataRow["VehicleNo"]</td>
-                    <td>@Convert.ToDouble(dataRow["Rent"].ToString())rs.</td>
-                    <td>@dataRow["Availability"]</td>
+                    <td class="text-center">@dataRow["CarName"]</td>
+                    <td class="text-center">@dataRow["BrandName"]</td>
+                    <td class="text-center">@dataRow["Model"]</td>
+                    <td class="text-center">@Convert.ToInt32( dataRow["Year"].ToString())</td>
+                    <td class="text-center">@dataRow["TransmissionType"]</td>
+                    <td class="text-center">@dataRow["FuelType"]</td>
+                    <td class="text-center">@dataRow["VehicleNo"]</td>
+                    <td class="text-center">@Convert.ToDouble(dataRow["Rent"].ToString())rs.</td>
+                    <td class="text-center">@dataRow["Availability"]</td>
                     @*<td class="text-center">@Convert.ToDateTime(dataRow["Created"]).ToString("dd-MM-yyyy")</td>
                     <td class="text-center">@Convert.ToDateTime(dataRow["Modified"]).ToString("dd-MM-yyyy")</td>*@
-                    <td class="justify-content-center">
-                        <div class="d-flex">
+                        <td class="justify-content-center  text-center">
+                            <div class="d-flex justify-content-center">
                             <div class="me-2">
                                 <form asp-area="Car" asp-controller="Car" asp-action="CarAddEdit">
                                     <input type="hidden" value="@Convert.ToInt32(dataRow["CarID"].ToString())" name="CarID" />

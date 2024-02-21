@@ -10,25 +10,6 @@
 
         public static int? CustomerID()
         {
-            //         try
-            //         {
-            //             Console.WriteLine(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
-
-            //             if (_HttpContextAccessor.HttpContext.Session.GetString("CustomerID") != null)
-            //             {
-            //		Console.WriteLine(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
-
-            //		return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
-
-            //	}
-            //	else
-            //                 return 0;
-
-            //}catch(Exception ex)
-            //         {
-            //             return null;    
-            //         }
-            Console.WriteLine(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
             return Convert.ToInt32(_HttpContextAccessor.HttpContext.Session.GetString("CustomerID"));
         }
 
@@ -47,13 +28,18 @@
             return _HttpContextAccessor.HttpContext.Session.GetString("LastName");
         }
         
-        public static string? ImageURL()
+        public static string? IsAdmin()
+        {
+            return _HttpContextAccessor.HttpContext.Session.GetString("IsAdmin");
+        }
+
+        public static string? CustomerImageURL()
 		{
 			string? ImageURL = null;
-			if (_HttpContextAccessor.HttpContext.Session.GetString("ImageURL") != null)
+			if (_HttpContextAccessor.HttpContext.Session.GetString("CustomerImageURL") != null)
 			{
 				ImageURL =
-			   _HttpContextAccessor.HttpContext.Session.GetString("ImageURL");
+			   _HttpContextAccessor.HttpContext.Session.GetString("CustomerImageURL");
 			}
 
 			return ImageURL;
