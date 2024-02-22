@@ -7,18 +7,18 @@
 @model DataTable
 @using CarChoice.Areas.Customer.Models;
 
-
+<div style="margin-top:2rem; margin-left:10rem;">
 <main id="main" class="main ">
 
     <section class="section profile justify-content-center;">
         <div class="row">
-            <div class="col-xl-2">
+            <div class="col-xl-4">
 
                 <div class="card">
-                    <div class="card-body  pt-3 d-flex flex-column align-items-center">
+                    <div class="card-body  pt-6 d-flex flex-column align-items-center">
 
-                        <img src=@Url.Content(@Model.Rows[0]["CustomerImageURL"].ToString()) alt="Profile" class="img-thumbnail" style=" border-radius: 10%; height:130px; width:150px;" />
-                        <h3 style="font-size:large; font-weight:500">@Model.Rows[0]["FirstName"]  @Model.Rows[0]["LastName"]</h3>
+                        <img src=@Url.Content(@Model.Rows[0]["CustomerImageURL"].ToString()) alt="Profile"  style=" border-radius: 10%; height:20rem; width:100%;" />
+                        <h3 style="font-size:x-large; font-weight:500; margin-top:20px;">@Model.Rows[0]["FirstName"]  @Model.Rows[0]["LastName"]</h3>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                         <ul class="nav nav-tabs nav-tabs-bordered">
 
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" style="font-size:x-large; font-weight:500; color:black; ">Profile Details</button>
                             </li>
 
 
@@ -41,58 +41,63 @@
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
-                                <h4 class="card-title">Profile Details</h4>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label " style=" color:black;">Full Name</div>
-                                    <div class="col-lg-8 col-md-8 " style=" color:black;">@Model.Rows[0]["FirstName"]</div>
+                                    <div class="col-lg-3 col-md-3 label " style=" color:black;">Full Name</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8 " style=" color:black;">@Model.Rows[0]["FirstName"]</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">LastName</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["LastName"]</div>
+                                    <div class="col-lg-3 col-md-3 label" style=" color:black;">LastName</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["LastName"]</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Email</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black">@Model.Rows[0]["Email"]</div>
+                                    <div class="col-lg-3 col-md-3 label" style=" color:black;">Email</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8" style=" color:black">@Model.Rows[0]["Email"]</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">User Name</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black">@Model.Rows[0]["UserName"]</div>
+                                    <div class="col-lg-3 col-md-3 label" style=" color:black;">User Name</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8" style=" color:black">@Model.Rows[0]["UserName"]</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Mobile</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["Mobile"]</div>
+                                    <div class="col-lg-3 col-md-3 label" style=" color:black;">Mobile</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["Mobile"]</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Address</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["Address"]</div>
+                                    <div class="col-lg-3 col-md-3 label" style=" color:black;">Address</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["Address"]</div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">LicenceNumber</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["LicenceNumber"]</div>
+                                    <div class="col-lg-3 col-md-3 label" style=" color:black;">Licence no.</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rows[0]["LicenceNumber"]</div>
                                  </div>
 
-                                <div class=" row d-flex justify-content-center">
-                                    <div class="col-3 ms-4 justify-content-center">
-                                        <form method="post" asp-area="Customer" asp-controller="Customer" asp-action="Back">
-                                            <button type="submit" class="btn btn-primary" value="Detals">Back</button>
-                                        </form>
+
+                                    <div class="col-12 d-flex" style="margin-top:1rem;">
+                                        <div class="col-md-5">
+                                            <form asp-area="Customer" asp-controller="Customer" asp-action="EditCustomerDetails">
+                                                <input type="hidden" value="@Convert.ToInt32(Model.Rows[0]["CustomerID"])" name="CustomerID" />
+                                                <button type="submit" class="btn btn-warning w-100 m-2" value="Detals">Edit </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <a class="btn btn-info w-100 m-2" asp-area="Customer" asp-controller="Customer" asp-action="Back">Back</a>
+
+                                        </div>
+
                                     </div>
-                                    
-                                    <div class=" col me-4">
-                                        <form asp-area="Customer" asp-controller="Customer" asp-action="EditCustomerDetails">
-                                            <input type="hidden" value="@Convert.ToInt32(Model.Rows[0]["CustomerID"].ToString())" name="CustomerID" />
-                                            <button type="submit" class="btn btn-warning" value="Detals">Edit</button>
-                                        </form>
-                                    </div>
-                                    
-                                </div>
 
                             </div>
 
@@ -111,6 +116,7 @@
    
 
 </main><!-- End #main -->
+</div>
 @*@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

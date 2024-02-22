@@ -37,7 +37,7 @@ namespace CarChoice.DAL.Car_User
             try
             {
                 SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
-                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CarDetails_SelectByPK");
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_CarDetails_SelectByPk");
                 sqlDatabase.AddInParameter(dbCommand, "@CarID", DbType.Int64, CarID);
                 DataTable dataTable = new DataTable();
                 using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
@@ -49,13 +49,19 @@ namespace CarChoice.DAL.Car_User
                     carModel.CarID = Convert.ToInt32(dataRow["CarID"]);
                     carModel.CarName = dataRow["CarName"].ToString();
                     carModel.BrandID = Convert.ToInt32(dataRow["BrandID"]);
+                    carModel.BrandName = dataRow["BrandName"].ToString();
                     carModel.Model = dataRow["Model"].ToString();
                     carModel.Year = Convert.ToInt32(dataRow["Year"]);
                     carModel.TransmissionID = Convert.ToInt32(dataRow["TransmissionID"]);
+                    carModel.TransmissionType = dataRow["TransmissionType"].ToString();
                     carModel.FuelID = Convert.ToInt32(dataRow["FuelID"]);
+                    carModel.FuelType = dataRow["FuelType"].ToString();
                     carModel.Availability = dataRow["Availability"].ToString();
                     carModel.VehicleNo = dataRow["VehicleNo"].ToString();
                     carModel.RentID = Convert.ToInt32(dataRow["RentID"]);
+                    carModel.Rent = Convert.ToDouble(dataRow["Rent"]);
+                    carModel.CarType = dataRow["CarType"].ToString();
+
                     carModel.CarImageURL = dataRow["CarImageURL"].ToString();
                     carModel.Created = Convert.ToDateTime(dataRow["Created"].ToString());
                     carModel.Modified = Convert.ToDateTime(dataRow["Modified"].ToString());

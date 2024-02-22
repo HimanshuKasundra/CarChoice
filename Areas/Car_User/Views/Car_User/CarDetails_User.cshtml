@@ -6,122 +6,133 @@
 
 @model CarChoice.Areas.Car_User.Models.Car_UserModel;
 
+<div style="margin-top:2rem; margin-left:10rem;">
+    <main id="main" class="main ">
 
-<main id="main" class="main ">
+        <section class="section profile justify-content-center;">
+            <div class="row">
+                <div class="col-xl-4">
 
-    <section class="section profile justify-content-center;">
-        <div class="row">
-            <div class="col-xl-2">
+                    <div class="card">
+                        <div class="card-body  pt-6 d-flex flex-column align-items-center">
 
-                <div class="card">
-                    <div class="card-body  pt-3 d-flex flex-column align-items-center">
-
-                        <img src=@Url.Content(@Model.CarImageURL) alt="Profile" class="img-thumbnail" style=" border-radius: 10%; height:130px; width:150px;" />
-                        <h3 style="font-size:large; font-weight:500">@Model.CarName </h3>
+                            <img src=@Url.Content(@Model.CarImageURL) alt="Profile" style=" border-radius: 10%; height:20rem; width:100%;" />
+                            <h3 style="font-size:x-large; font-weight:500; margin-top:20px;">@Model.CarName </h3>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="col-xl-5">
 
-            <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
 
-                <div class="card">
-                    <div class="card-body pt-3">
-                        <!-- Bordered Tabs -->
-                        <ul class="nav nav-tabs nav-tabs-bordered">
-
-                            <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
-                            </li>
+                                <li class="nav-item">
+                                    <button class="nav-link active " data-bs-toggle="tab" data-bs-target="#profile-overview" style="font-size:x-large; font-weight:500; color:black;">Car Details</button>
+                                </li>
 
 
-                        </ul>
-                        <div class="tab-content pt-2">
+                            </ul>
+                            <div class="tab-content pt-2">
 
-                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
 
-                                <h4 class="card-title">Car Details</h4>
 
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label " style=" color:black;">Car Name</div>
-                                    <div class="col-lg-8 col-md-8 " style=" color:black;">@Model.CarName</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Brand Name</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.BrandName</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Model</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black">@Model.Model</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Year</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black">@Model.Year</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Transmission</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.TransmissionType</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Fuel Type</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.FuelType</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Availability</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Availability</div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Vehicle no.</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.VehicleNo</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Rent</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.Rent</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 label" style=" color:black;">Car Type</div>
-                                    <div class="col-lg-8 col-md-8" style=" color:black;">@Model.CarType</div>
-                                </div>
-                                <div class=" row d-flex justify-content-center">
-                                    <div class="col-3 ms-4 justify-content-center">
-                                        <form method="post" asp-area="Car_User" asp-controller="Car_User" asp-action="Back">
-                                            <button type="submit" class="btn btn-primary" value="Detals">Back</button>
-                                        </form>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label " style=" color:black;">Car Name</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7 " style=" color:black;">@Model.CarName</div>
                                     </div>
 
-                                    <div class=" col me-4">
-                                        <form asp-area="Car_User" asp-controller="Car_User" asp-action="EditCustomerDetails">
-                                            <input type="hidden" value="@Convert.ToInt32(Model.CarID.ToString())" name="CarID" />
-                                            <button type="submit" class="btn btn-warning" value="Detals">Book</button>
-                                        </form>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Brand Name</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.BrandName</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Model</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+
+                                        <div class="col-lg-7 col-md-7" style=" color:black">@Model.Model</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Year</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black">@Model.Year</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Transmission</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.TransmissionType</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Fuel Type</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.FuelType</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Availability</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.Availability</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Vehicle no.</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.VehicleNo</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Rent</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.Rent <span> &#8377</span>/day</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Car Type</div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.CarType</div>
+                                    </div>
+
+
+                                    <div class="col-12 d-flex" style="margin-top:1rem;">
+                                        <div class="col-md-5">
+                                            <form asp-area="Car_User" asp-controller="Car_User" asp-action="EditCustomerDetails">
+                                                <input type="hidden" value="@Convert.ToInt32(Model.CarID.ToString())" name="CarID" />
+                                                <button type="submit" class="btn btn-warning w-100 m-2" value="Detals">Book</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <a class="btn btn-info w-100 m-2" asp-area="Car_User" asp-controller="Car_User" asp-action="Back">Back</a>
+
+                                        </div>
+
                                     </div>
 
                                 </div>
 
-                            </div>
 
 
 
+                            </div><!-- End Bordered Tabs -->
 
-                        </div><!-- End Bordered Tabs -->
-
+                        </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
 
 
 
-</main><!-- End #main -->
+    </main><!-- End #main -->
+</div>
 @*@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
