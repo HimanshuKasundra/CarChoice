@@ -1,0 +1,38 @@
+﻿@using CarChoice.Areas.Car_User.Models
+@{
+    Layout = "~/Views/shared/_Layout_CustomerDetails.cshtml";
+    Car_UserModel car_UserModel = new Car_UserModel();
+}
+
+<div class="card" style="position: relative; text-align: center; color: white;">
+    <img src="~/image/bg_2.jpg" style="height:30rem; filter: blur(2px); -webkit-filter: blur(2px); background-color: rgba(0,0,0, 0.9); box-shadow:rgba(0,0,0,0,0.3)">
+    
+    <div class="centered" style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); font-size:30px; color:white;); font-weight:bold">
+        Book your ride now!
+    </div>
+    <div class="card" style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+
+        <form method="post" asp-controller="Car_User" asp-action="CarListByDate" asp-area="Car_User">
+            <div class="card-header" style="background-color: #edf2ff">
+                <div class="d-flex justify-content-between align-items-center row ">
+                    <div class="col-md-4 ">
+                        <label for="Pickup Date" class="fw-bold mb-1 ms-1" style="color:black; ">From Date</label>
+                        <input type="datetime-local" placeholder="PickUpdate" class="form-control" id="PickupDate" name="PickupDate" />
+                    </div>
+                    <div class="col-md-4 ">
+                        <label for="Return Date" class="fw-bold mb-1 ms-1" style="color:black;">To Date</label>
+                        <input type="datetime-local" placeholder="ReturnDate" class="form-control" id="ReturnDate" name="ReturnDate" />
+                    </div>
+                    <div class="col-md-4 ">
+                        <button type="submit" class="btn btn-success waves-effect waves-light text-white">
+                            Get Car
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+</div>

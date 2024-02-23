@@ -1,8 +1,27 @@
 ﻿@{
     ViewData["Title"] = " Customer Details";
     Layout = "~/Views/Shared/_Layout_CustomerDetails.cshtml";
+
+
+    DateTime PickupDate = Convert.ToDateTime(TempData["PickupDate"]);
+    DateTime ReturnDate = Convert.ToDateTime(TempData["ReturnDate"]);
+
+    TimeSpan value = ReturnDate.Subtract(PickupDate);
+    int day = 0;
+    if (value.Days < 0)
+    {
+        day = 1;
+    }
+
+    else
+    {
+        day = value.Days;
+    }
+
+    double? totalCost = day * Model.Rent;
 }
 @using System.Data
+@using CarChoice.BAL;
 
 @model CarChoice.Areas.Car_User.Models.Car_UserModel;
 
@@ -61,12 +80,6 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Year</div>
-                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
-                                        <div class="col-lg-7 col-md-7" style=" color:black">@Model.Year</div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-lg-4 col-md-4 label" style=" color:black;">Transmission</div>
                                         <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
                                         <div class="col-lg-7 col-md-7" style=" color:black;">@Model.TransmissionType</div>
@@ -78,11 +91,6 @@
                                         <div class="col-lg-7 col-md-7" style=" color:black;">@Model.FuelType</div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Availability</div>
-                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
-                                        <div class="col-lg-7 col-md-7" style=" color:black;">@Model.Availability</div>
-                                    </div>
 
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 label" style=" color:black;">Vehicle no.</div>
@@ -100,10 +108,26 @@
                                         <div class="col-lg-7 col-md-7" style=" color:black;">@Model.CarType</div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">From </div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@PickupDate</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">To </div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@ReturnDate</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 label" style=" color:black;">Total Fare </div>
+                                        <div class="col-lg-1 col-md-1 label " style=" color:black;">:</div>
+                                        <div class="col-lg-7 col-md-7" style=" color:black;">@totalCost<span> &#8377</span></div>
+                                    </div>
+
 
                                     <div class="col-12 d-flex" style="margin-top:1rem;">
                                         <div class="col-md-5">
-                                            <form asp-area="Car_User" asp-controller="Car_User" asp-action="EditCustomerDetails">
+                                            <form asp-action="BookingHistory" asp-area="Car_User" asp-controller="Car_User" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())" asp-route-PickupDate="@TempData["PickupDate"]" asp-route-ReturnDate="@TempData["ReturnDate"]" asp-route-totalCost="@totalCost" asp-route-RentID="@Model.RentID" onclick="return fun1();">
                                                 <input type="hidden" value="@Convert.ToInt32(Model.CarID.ToString())" name="CarID" />
                                                 <button type="submit" class="btn btn-warning w-100 m-2" value="Detals">Book</button>
                                             </form>

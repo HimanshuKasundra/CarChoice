@@ -21,6 +21,7 @@
         public string VehicleNo { get; set; }
         public double Rent { get; set; }
         public int RentID { get; set; }
+        public double TotalCost { get; set; }
         public string CarType { get; set; }
         public string CarImageURL { get; set; }
         public DateTime PickupDate { get; set; }
