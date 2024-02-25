@@ -42,7 +42,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a asp-action="Index" asp-controller="Home" class="nav-link">Home &nbsp;&nbsp; &nbsp;</a></li>
                     <li class="nav-item"><a asp-action="GetCarPage" asp-area="Car_User" asp-controller="Car_User" class="nav-link">Cars  &nbsp;&nbsp;&nbsp;</a></li>
-                    <li class="nav-item"><a asp-action="BookingHistory" asp-area="Car_User" asp-controller="Car_User" class="nav-link">BookingList &nbsp;&nbsp;&nbsp;</a></li>
+                    <li class="nav-item"><a asp-action="BookingHistory" asp-area="Car_User" asp-controller="Car_User" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())" class="nav-link">BookingList &nbsp;&nbsp;&nbsp;</a></li>
                     <li class="nav-item"><a href="#footer" class="nav-link">About  &nbsp;&nbsp;&nbsp;</a></li>
                     <li class="nav-item"><a href="#footer" class="nav-link">Contact  &nbsp;&nbsp;&nbsp;</a></li>
 
@@ -200,6 +200,6 @@
     <script src="~/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="~/js/google-map.js"></script>
     <script src="~/js/main.js"></script>
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

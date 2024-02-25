@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Nice_Admin_Panel</title>
+    <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Nice_Admin_Panel.styles.css" asp-append-version="true" />
@@ -46,7 +46,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="#" class="logo d-flex align-items-center">
                 <img src="~/img/logo.png" alt="">
-                <span class="d-none d-lg-block">Admin Panel</span>
+                <span class="d-none d-lg-block fw-bold" style="color:black;font-family:'Times New Roman', Times, serif; font-size:x-large;  ">Car<span style="color:darkgoldenrod;font-family:'Times New Roman', Times, serif; font-size:x-large;  ">Choice</span></span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -300,6 +300,13 @@
             </li><!-- End Car Nav -->
 
             <li class="nav-item">
+                <a class="nav-link" asp-area="Car_User" asp-controller="Car_User" asp-action="Admin_ReservationView">
+                    <i class="bi bi-grid"></i>
+                    <span>Reservation List</span>
+                </a>
+            </li><!-- End Reservation Nav -->
+
+            <li class="nav-item">
                 <a class="nav-link" asp-area="Transmission" asp-controller="Transmission" asp-action="TransmissionList">
                     <i class="bi bi-grid"></i>
                     <span>Transmission</span>
@@ -319,6 +326,8 @@
                 </a>
             </li><!-- End Fuel Nav -->
 
+           
+
 
 
            
@@ -336,7 +345,7 @@
     <!-- ======= Footer ======= -->
    <footer id="footer" class="footer">
     <div class="copyright">
-    &copy; Copyright <strong><span>AdminPanel</span></strong>. All Rights Reserved
+    &copy; Copyright <strong><span>CarChoice</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
     <!-- All the links in the footer should remain intact. -->

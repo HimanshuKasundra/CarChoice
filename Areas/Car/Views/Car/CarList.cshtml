@@ -33,7 +33,7 @@
     <table class="table table-hover table-bordered  table-header-fixed">
         <thead>
             <tr>
-                    <th scope="col" class="text-center">Image</th>
+                    <th scope="col" class="text-center">CarImage</th>
 
                     <th scope="col" class="text-center" =>CarName</th>
                     <th scope="col" class="text-center" =>Brand</th>
@@ -53,7 +53,7 @@
             @foreach (DataRow dataRow in Model.Rows)
             {
                 <tr>
-                    <td class="text-center"><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 20%; height:90px; width:1500px;" /></td>
+                        <td class="text-center"><img src=@Url.Content(@dataRow["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 20%;height:80px; width:80px;" /></td>
 
                     <td class="text-center">@dataRow["CarName"]</td>
                     <td class="text-center">@dataRow["BrandName"]</td>

@@ -36,7 +36,7 @@
                         <div class="card-body  pt-6 d-flex flex-column align-items-center">
 
                             <img src=@Url.Content(@Model.CarImageURL) alt="Profile" style=" border-radius: 10%; height:20rem; width:100%;" />
-                            <h3 style="font-size:x-large; font-weight:500; margin-top:20px;">@Model.CarName </h3>
+                            <h3 style="font-size:x-large; font-weight:500; margin-top:20px; font-family:'Times New Roman', Times, serif;">@Model.CarName </h3>
                         </div>
                     </div>
 
@@ -127,7 +127,7 @@
 
                                     <div class="col-12 d-flex" style="margin-top:1rem;">
                                         <div class="col-md-5">
-                                            <form asp-action="BookingHistory" asp-area="Car_User" asp-controller="Car_User" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())" asp-route-PickupDate="@TempData["PickupDate"]" asp-route-ReturnDate="@TempData["ReturnDate"]" asp-route-totalCost="@totalCost" asp-route-RentID="@Model.RentID" onclick="return fun1();">
+                                            <form asp-action="BookingSave" asp-area="Car_User" asp-controller="Car_User" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())" asp-route-PickupDate="@TempData["PickupDate"]" asp-route-ReturnDate="@TempData["ReturnDate"]" asp-route-totalCost="@totalCost" asp-route-RentID="@Model.RentID" onclick="return fun1(); " >
                                                 <input type="hidden" value="@Convert.ToInt32(Model.CarID.ToString())" name="CarID" />
                                                 <button type="submit" class="btn btn-warning w-100 m-2" value="Detals">Book</button>
                                             </form>
@@ -157,8 +157,19 @@
 
     </main><!-- End #main -->
 </div>
-@*@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}*@
+@section Scripts
+    {
+    <script>
+        function fun1() {
+            if (
+                confirm(
+                    "Are you sure you want to Book this Car \n From @PickupDate.ToString() To @ReturnDate.ToString() \n\n Your Car booking confirmation details will sent you very soon \non your Registration Email Address")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        
+    </script>
+}

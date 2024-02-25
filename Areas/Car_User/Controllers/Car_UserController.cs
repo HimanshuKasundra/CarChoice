@@ -14,6 +14,7 @@ using System.Reflection;
 using CarChoice.DAL;
 using CarChoice.DAL.Car;
 using CarChoice.Areas.Customer.Models;
+using Microsoft.Extensions.Logging;
 
 namespace CarChoice.Areas.Car_User.Controllers
 {
@@ -25,21 +26,29 @@ namespace CarChoice.Areas.Car_User.Controllers
     {
         private readonly IConfiguration Configuration;
 
+        #region constructor
         public Car_UserController(IConfiguration _Configuration)
         {
             Configuration = _Configuration;
         }
+        #endregion
+
+        #region method:Index
         public IActionResult Index()
         {
             return View();
         }
+        #endregion
 
+        #region method: GetCarPage
         public IActionResult GetCarPage()
         {
             return View();
         }
+        #endregion
 
-        #region Car List
+
+        #region Car List Datewise
         Car_UserDAL car_UserDAL = new Car_UserDAL();
         [HttpPost]
         public IActionResult CarListByDate(Car_UserModel car_UserModel)
@@ -120,13 +129,13 @@ namespace CarChoice.Areas.Car_User.Controllers
 
         #region Book Car
         [CheckAccess]
-        public IActionResult BookinSave(int CarID, int CustomerID, int RentID ,string PickupDate, string ReturnDate, double totalCost)
+        public IActionResult BookingSave(int CarID, int CustomerID, int RentID ,string PickupDate, string ReturnDate, double totalCost)
         {
             
                 if (car_UserDAL.BookingSave(CarID, CustomerID, RentID, PickupDate, ReturnDate, totalCost))
                 {
                     //userDAL.SendEmail(Email);
-                    return RedirectToAction("BookingHistory",CustomerID);
+                    return RedirectToAction("BookingHistory", new { CustomerID }   );
                 }
             Console.WriteLine(CustomerID);
 
@@ -156,6 +165,70 @@ namespace CarChoice.Areas.Car_User.Controllers
         }
         #endregion
 
+        #region Admin Reservation View
+        [CheckAccess]
+        public IActionResult Admin_ReservationView()
+        {
+            DataTable dt = car_UserDAL.dbo_PR_ReservationDetails_SelectAll();
+            return View(dt);
+
+        }
+        #endregion
+
+        #region method:Cancel Trip
+        [CheckAccess]
+        public IActionResult CancelTrip(int CustomerID, int CarID)
+        {
+
+            if (car_UserDAL.dbo_PR_ReservationStatusCancel_UpdateByCustomerID(CustomerID,CarID))
+            {
+                //userDAL.SendEmail(Email);
+                return RedirectToAction("BookingHistory", new { CustomerID });
+            }
+            Console.WriteLine(CustomerID);
+
+            return RedirectToAction("CarDetails_User");
+
+        }
+        #endregion
+
+        #region method:Approval
+        [CheckAccess]
+        public IActionResult Approval(int CustomerID, int CarID, string Email)
+        {
+
+            if (car_UserDAL.dbo_PR_ReservationStatusApprove_UpdateByCustomerID(CustomerID, CarID))
+            {
+                car_UserDAL.SendEmail(Email);
+
+                return RedirectToAction("Admin_ReservationView");
+            }
+
+            return RedirectToAction("CarDetails_User");
+
+        }
+        #endregion
+
+        #region method:Denied
+        [CheckAccess]
+        public IActionResult Denied(int CustomerID, int CarID)
+        {
+
+            if (car_UserDAL.dbo_PR_ReservationStatusCancel_UpdateByCustomerID(CustomerID, CarID))
+            {
+                return RedirectToAction("Admin_ReservationView");
+
+                
+            }
+            Console.WriteLine(CustomerID);
+
+            return RedirectToAction("CarDetails_User");
+
+        }
+        #endregion
+
+
+        
         public IActionResult Back()
         {
 

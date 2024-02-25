@@ -1,4 +1,5 @@
 ﻿@using System.Data;
+@using CarChoice.BAL;
 @{
     ViewData["Title"] = " Customer Details";
     Layout = "~/Views/Shared/_Layout_CustomerDetails.cshtml";
@@ -21,13 +22,13 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Car Name</th>
-                                <th scope="col">Brand Name</th>
-                                <th scope="col">Rent per/day</th>
-                                <th scope="col">From Date</th>
-                                <th scope="col">To Date</th>
-                                <th scope="col">Total Fare</th>
-                                <th scope="col">Action</th>
+                                <th scope="col" class="text-center">Car Name</th>
+                                <th scope="col" class="text-center">Brand Name</th>
+                                <th scope="col" class="text-center">From Date</th>
+                                <th scope="col" class="text-center">To Date</th>
+                                <th scope="col" class="text-center">Total Fare</th>
+                                <th scope="col" class="text-center"> Booking Status</th>
+                                <th scope="col" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,18 +39,19 @@
                             DateTime date2 = new DateTime(0001, 01, 01, 00, 00, 00);*@
                                 
                                 <tr>
-                                    <td>@dr["CarName"]</td>
-                                    <td>@dr["BrandName"]</td>
-                                    <td>@dr["Rent"]</td>
-                                    <td>@dr["PickupDate"]</td>
-                                    <td>@dr["ReturnDate"]   </td>
-                                        <td>@dr["TotalCost"]</td>
-                                   @* <td>
-                                        <a asp-area="User" asp-controller="User" asp-action="UpdateCarFromAndToDate" asp-route-CarID="@dr["CarID"]">
-                                            <input type="button" class="btn btn-success" value="End Trip" />
+                                    <td class="text-center">@dr["CarName"]</td>
+                                    <td class="text-center">@dr["BrandName"]</td>
+                                    <td class="text-center">@dr["PickupDate"]</td>
+                                    <td class="text-center">@dr["ReturnDate"]   </td>
+                                    <td class="text-center">@dr["TotalCost"]</td>
+                                    <td class="text-center">@dr["Status"]</td>
+
+                                    <td>
+                                        <a asp-area="Car_User" asp-controller="Car_User" asp-action="CancelTrip" asp-route-CarID="@Convert.ToInt32(dr["CarID"])" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())">
+                                            <input type="button" class="btn btn-danger" value="Cancel Trip" />
                                         </a>
 
-                                    </td>*@
+                                    </td>
                                 </tr>
                             }
                         </tbody>

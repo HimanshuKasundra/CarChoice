@@ -13,7 +13,7 @@
         public int Year { get; set; }
         public string TransmissionType { get; set; }
         public int TransmissionID { get; set; }
-
+        public string Status { get; set; }
         public string FuelType { get; set; }
         public int FuelID { get; set; }
 
@@ -21,6 +21,7 @@
         public string VehicleNo { get; set; }
         public double Rent { get; set; }
         public int RentID { get; set; }
+        public int StatusID { get; set; }
         public double TotalCost { get; set; }
         public string CarType { get; set; }
         public string CarImageURL { get; set; }

@@ -84,7 +84,9 @@ namespace CarChoice.DAL.Car_User
 
             SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
             DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ReservationDetails_Insert");
+
             sqlDatabase.AddInParameter(dbCommand, "@CarID", DbType.Int32, CarID);
+
             sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, CustomerID);
             sqlDatabase.AddInParameter(dbCommand, "@RentID", DbType.Int32, RentID);
 
@@ -93,7 +95,11 @@ namespace CarChoice.DAL.Car_User
             sqlDatabase.AddInParameter(dbCommand, "@TotalCost", DbType.Double, totalCost);
 
             bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
-            return isSuccess;
+
+            return isSuccess ;
+
+            
+
         }
         #endregion
 
@@ -112,16 +118,7 @@ namespace CarChoice.DAL.Car_User
                 {
                     dataTable.Load(dataReader);
                 }
-                //foreach (DataRow dataRow in dataTable.Rows)
-                //{
-                //    carModel.CarName = dataRow["CarName"].ToString();
-                //    carModel.BrandName = dataRow["BrandName"].ToString();
-                //    carModel.Rent = Convert.ToDouble(dataRow["Rent"]);
-                //    carModel.PickupDate = Convert.ToDateTime(dataRow["PickupDate"]);
-                //    carModel.ReturnDate = Convert.ToDateTime(dataRow["ReturnDate"]);
-                //    carModel.TotalCost = Convert.ToDouble(dataRow["TotalCost"]);
-
-                //}
+               
                 return dataTable;
             }catch(Exception ex)
             {
@@ -129,5 +126,69 @@ namespace CarChoice.DAL.Car_User
             }
         }
         #endregion
+
+
+
+        #region Booking Cancel
+        public bool dbo_PR_ReservationStatusCancel_UpdateByCustomerID(int CustomerID,int CarID)
+        {
+            SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+            DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ReservationStatusCancel_UpdateByCustomerID");
+            DbCommand dbCommand1 = sqlDatabase.GetStoredProcCommand("PR_Car_Available_UpdateByCarID");
+            sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, CustomerID);
+            sqlDatabase.AddInParameter(dbCommand, "@CarID", DbType.Int32, CarID);
+            sqlDatabase.AddInParameter(dbCommand1, "@CarID", DbType.Int32, CarID);
+
+            bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+            bool isSuccess1 = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand1));
+
+            return isSuccess;
+
+        }
+        #endregion
+
+
+        #region Booking Approve
+
+        public bool dbo_PR_ReservationStatusApprove_UpdateByCustomerID(int CustomerID, int CarID)
+        {
+            SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+            DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ReservationStatusConfirmed_UpdateByAdmin");
+            DbCommand dbCommand1 = sqlDatabase.GetStoredProcCommand("PR_CarDetails_Availability_UpdateByCarID");
+
+            sqlDatabase.AddInParameter(dbCommand, "@CustomerID", DbType.Int32, CustomerID);
+            sqlDatabase.AddInParameter(dbCommand, "@CarID", DbType.Int32, CarID);
+            sqlDatabase.AddInParameter(dbCommand1, "@CarID", DbType.Int32, CarID);
+
+            bool isSuccess = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand));
+            bool isSuccess1 = Convert.ToBoolean(sqlDatabase.ExecuteNonQuery(dbCommand1));
+
+            return isSuccess;
+
+        }
+        #endregion
+
+        #region Method: dbo.PR_ReservationDetails_SelectAll
+        public DataTable dbo_PR_ReservationDetails_SelectAll()
+        {
+            try
+            {
+                SqlDatabase sqlDatabase = new SqlDatabase(ConnectionString);
+                DbCommand dbCommand = sqlDatabase.GetStoredProcCommand("PR_ReservationDetails_SelectAll");
+                DataTable dt = new DataTable();
+                using (IDataReader dataReader = sqlDatabase.ExecuteReader(dbCommand))
+                {
+                    dt.Load(dataReader);
+                }
+                return dt;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
     }
 }
