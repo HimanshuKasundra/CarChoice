@@ -28,6 +28,8 @@
 
 
 
+using CarChoice.BAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -40,6 +42,9 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSession();
+//builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+builder.Services.AddSingleton<IEmailSender>(new EmailSender("smtp.gmail.com", 587, "himanshukasundra1503@gmail.com", "yupgishfzjzgjgkf"));
 
 
 var app = builder.Build();

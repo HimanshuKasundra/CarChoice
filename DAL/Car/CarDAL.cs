@@ -116,7 +116,6 @@ namespace CarChoice.DAL.Car
                     RentDropDownModel rentDropDownModel = new RentDropDownModel();
                     rentDropDownModel.RentID = Convert.ToInt32(dataRow["RentID"]);
                     rentDropDownModel.Rent = Convert.ToDouble(dataRow["Rent"]);
-
                     rentDropDownModel.CarType = dataRow["CarType"].ToString();
                     listOfRent.Add(rentDropDownModel);
                 }

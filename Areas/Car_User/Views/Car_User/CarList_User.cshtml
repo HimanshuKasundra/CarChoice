@@ -5,7 +5,9 @@
 
 @{
     ViewData["Title"] = "Car List";
-    Layout = "~/Views/Shared/_Layout_CarList.cshtml";
+    //Layout = "~/Views/Shared/_Layout_CarList.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 
     DateTime PickupDate = Convert.ToDateTime(TempData["PickupDate"]);
     DateTime ReturnDate = Convert.ToDateTime(TempData["ReturnDate"]);
@@ -25,9 +27,23 @@
     //double? totalCost = day * Model.Rent;
 
 }
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('@Url.Content("~/images/bg_3.jpg")');background-size: cover; background-position: center;" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <h1 class=" fw-bold" style="color:black; font-size:xx-large; margin-left:40px; font-family:'Times New Roman', Times, serif;">Car<span class="  fw-bold " style="color:yellowgreen; font-family:'Times New Roman', Times, serif; font-size:xx-large;">List</span></h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="section">
     <div >
-    <h1 class=" fw-bold" style="color:black; font-size:xx-large; margin-left:40px; font-family:'Times New Roman', Times, serif;" >Car<span class="  fw-bold " style="color:yellowgreen; font-family:'Times New Roman', Times, serif; font-size:xx-large;">List</span></h1>
     <div style=" margin-top:2px;  margin-left:30px;  margin-right:30px;  ">
 
         <div class="row" >

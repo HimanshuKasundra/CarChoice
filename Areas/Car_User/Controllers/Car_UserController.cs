@@ -25,11 +25,13 @@ namespace CarChoice.Areas.Car_User.Controllers
     public class Car_UserController : Controller
     {
         private readonly IConfiguration Configuration;
+        private readonly IEmailSender _emailSender;
 
         #region constructor
-        public Car_UserController(IConfiguration _Configuration)
+        public Car_UserController(IConfiguration _Configuration, IEmailSender emailSender)
         {
             Configuration = _Configuration;
+            _emailSender = emailSender;
         }
         #endregion
 
@@ -199,7 +201,7 @@ namespace CarChoice.Areas.Car_User.Controllers
 
             if (car_UserDAL.dbo_PR_ReservationStatusApprove_UpdateByCustomerID(CustomerID, CarID))
             {
-                car_UserDAL.SendEmail(Email);
+                var i = SendEmail(Email);
 
                 return RedirectToAction("Admin_ReservationView");
             }
@@ -207,6 +209,31 @@ namespace CarChoice.Areas.Car_User.Controllers
             return RedirectToAction("CarDetails_User");
 
         }
+        #endregion
+
+
+        #region Mail
+        [HttpPost]
+        public bool SendEmail(string receiver)
+        {
+            var providerEmail = receiver;
+
+            if (!string.IsNullOrEmpty(providerEmail))
+            {
+                // Compose the email subject and body
+                var subject = "New job application";
+                //var user = db.UserTables.Find(userId);
+                var body = $"Booked";
+
+                // Send the email
+                _emailSender.SendEmailAsync(providerEmail, subject, body);
+                return true;
+            }
+            return false;
+
+
+        }
+        
         #endregion
 
         #region method:Denied

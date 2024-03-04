@@ -90,7 +90,7 @@
 
         <div class="col-md-12">
             <div class="form-floating mb-3">
-                <select class="form-control" asp-for="RentID"  asp-items="@(new SelectList(ViewBag.RentList,"RentID","CarType"))">
+                <select class="form-control" asp-for="RentID" asp-items="@(new SelectList(ViewBag.RentList,"RentID","CarType"))">
                     <option value="">Select Car Type</option>
                 </select>
                 <span asp-validation-for="RentID" class="text-danger"></span>

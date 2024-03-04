@@ -132,54 +132,7 @@ namespace CarChoice.DAL.Car_User
         }
         #endregion
 
-        #region Mail
-        [HttpPost]
-        public bool SendEmail(string receiver)
-        {
-            try
-            {
-
-                var senderEmail = new MailAddress("himanshukasundra1503@gmail.com", "Car Choice");
-                var receiverEmail = new MailAddress(receiver, "Receiver");
-                var password = "Kasundra@1503@Himanshu";
-                var subject = "Car Booking Confirmed";
-                var body = "You Booked Car from CarChoice servies, Thank you!!";
-                var smtp = new SmtpClient();
-                //{
-                //    Host = "smtp.gmail.com",
-                //    Port = 587,
-                //    EnableSsl = true,
-                //    DeliveryMethod = SmtpDeliveryMethod.Network,
-                //    UseDefaultCredentials = false,
-                //    Credentials = new NetworkCredential(senderEmail.Address, password, "smtp.gmail.com")
-                //};
-
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(senderEmail.Address, password, "smtp.gmail.com");
-
-
-                using (var mess = new MailMessage(senderEmail, receiverEmail)
-                {
-                    Subject = subject,
-                    Body = body
-                })
-                {
-                    smtp.Send(mess);
-                }
-                return true;
-
-            }
-            catch (Exception)
-            {
-                //ViewBag.Error = "Some Error";
-            }
-            return false;
-        }
-        #endregion
+        
 
     }
 }

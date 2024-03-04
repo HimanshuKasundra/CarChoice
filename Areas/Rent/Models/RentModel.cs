@@ -24,6 +24,7 @@ namespace CarChoice.Areas.Rent.Models
         public Double Rent { get; set; }
 
         public string CarType { get; set; }
+     
 
     }
 
