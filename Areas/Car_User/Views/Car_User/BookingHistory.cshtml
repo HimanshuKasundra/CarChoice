@@ -35,23 +35,32 @@
                         </thead>
                         <tbody>
                             @foreach (DataRow dr in Model.Rows)
-                            {@*
+                                {
+                                    @*
                             DateTime? From = Convert.ToDateTime(dr["DBFromDate"]);
                             DateTime? To = Convert.ToDateTime(dr["DBToDate"]);
                             DateTime date2 = new DateTime(0001, 01, 01, 00, 00, 00);*@
-                                
-                                <tr>
-                                    <td class="text-center"><img src=@Url.Content(@dr["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%;height:80px; width:80px;" /></td>
-                                    <td class="text-center">@dr["CarName"]</td>
-                                    <td class="text-center">@dr["BrandName"]</td>
-                                    <td class="text-center">@dr["PickupDate"]</td>
-                                    <td class="text-center">@dr["ReturnDate"]   </td>
-                                        <td class="text-center"> <span>&#8377 </span>@dr["TotalCost"]</td>
-                                    <td class="text-center">@dr["Status"]</td>
 
-                                    <td>
-                                        <a asp-area="Car_User" asp-controller="Car_User" asp-action="CancelTrip" asp-route-CarID="@Convert.ToInt32(dr["CarID"])" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())" onclick="func()">
-                                            <input type="button" class="btn btn-danger" value="Cancel Trip" />
+                                    <tr>
+                                        <td class="text-center"><img src=@Url.Content(@dr["CarImageURL"].ToString()) class="img-thumbnail" style=" border-radius: 50%;height:80px; width:80px;" /></td>
+                                        <td class="text-center">@dr["CarName"]</td>
+                                        <td class="text-center">@dr["BrandName"]</td>
+                                        <td class="text-center">@dr["PickupDate"]</td>
+                                        <td class="text-center">@dr["ReturnDate"]   </td>
+                                        <td class="text-center"> <span>&#8377 </span>@dr["TotalCost"]</td>
+                                        <td class="text-center">@dr["Status"]</td>
+
+                                        <td>
+                                            <a asp-area="Car_User" asp-controller="Car_User" asp-action="CancelTrip" asp-route-CarID="@Convert.ToInt32(dr["CarID"])" asp-route-CustomerID="@Convert.ToInt32(CV.CustomerID())" onclick="func()">
+                                                @if (Convert.ToInt32(dr["StatusID"].ToString()) == 3)
+                                                {
+                                                    <input type="button" id="cancelBooking" class="btn btn-danger" disabled value="Cancel Trip" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="button" id="cancelBooking" class="btn btn-danger" value="Cancel Trip" />
+                                                }
+
                                         </a>
 
                                     </td>
@@ -71,11 +80,18 @@
     <script>
         function func() {
             if (confirm("Are you sure you want to Cancel your trip?")) {
+                document.getElementById('cancelBooking').disabled = true;
+
                 return true;
             }
             else {
                 return false;
             }
+        }
+
+        function disableButton() {
+            // Disable the button
+            document.getElementById('cancelBooking').disabled = true;
         }
     </script>
 }
